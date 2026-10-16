@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParnaEventos — Proposta Arquitetural & Regras de Negócio | GCTI Parnamirim</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+
+  <!-- Top Progress Bar -->
+  <div class="presentation-progress-bar" id="progressBar"></div>
+
+  <!-- Executive Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-badge">
+        <span class="city-name">PREFEITURA DE PARNAMIRIM</span>
+        <span class="dept-name">GCTI • CIÊNCIA, TECNOLOGIA & INOVAÇÃO</span>
+      </div>
+      <div class="project-tag">
+        <span class="pulse-dot"></span>
+        <strong>ParnaEventos</strong> <span class="version-tag">v1.0 Proposta</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <span class="slide-indicator" id="slideIndicator">01 / 12</span>
+    </div>
+
+    <div class="header-right">
+      <button class="nav-icon-btn" id="btnNotes" title="Notas do Apresentador [Tecla N]">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span class="btn-label">Notas</span>
+      </button>
+
+      <button class="nav-icon-btn" id="btnSimulator" title="Abrir Simulador Interativo [Tecla S]">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <span class="btn-label highlight">Simulador Live</span>
+      </button>
+
+      <button class="nav-icon-btn" id="btnOverview" title="Grade de Slides [Tecla G]">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      </button>
+
+      <button class="nav-icon-btn" id="btnFullscreen" title="Tela Cheia [Tecla F]">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Presentation Viewport -->
+  <main class="presentation-viewport" id="viewport">
+
+    <!-- SLIDE 1: Capa Executiva -->
+    <section class="slide active" data-slide="1" id="slide-1">
+      <div class="slide-content slide-hero">
+        <div class="hero-badge-row">
+          <span class="hero-badge badge-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Iniciativa Estratégica Municipal
+          </span>
+          <span class="hero-badge badge-cyan">GCTI Parnamirim</span>
+          <span class="hero-badge badge-emerald">Arquitetura de Alta Concorrência</span>
+        </div>
+
+        <h1 class="hero-title">
+          Plataforma Municipal de Eventos
+          <span class="gradient-text">ParnaEventos</span>
+        </h1>
+
+        <p class="hero-lead">
+          Concepção técnica, arquitetura de domínio escalável e consolidação de regras de negócio para gestão de inscrições públicas com consistência transacional e auditoria completa.
+        </p>
+
+        <div class="hero-meta-card">
+          <div class="meta-item">
+            <span class="meta-label">Apresentação Dirigida a:</span>
+            <div class="meta-val highlight-target">
+              <div class="avatar-circle">AA</div>
+              <div>
+                <strong>Afrânio Alex</strong>
+                <span class="meta-sub">Gestor do GCTI • Parnamirim/RN</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="meta-divider"></div>
+
+          <div class="meta-item">
+            <span class="meta-label">Foco Central:</span>
+            <span class="meta-text">Prevenção de duplicidades, integridade de vagas, dependentes menores e validação presencial de kits.</span>
+          </div>
+
+          <div class="meta-divider"></div>
+
+          <div class="meta-item">
+            <span class="meta-label">Padrão Arquitetural:</span>
+            <span class="meta-tag-tech">DDD Pragmático</span>
+            <span class="meta-tag-tech">Monólito Modular</span>
+            <span class="meta-tag-tech">PostgreSQL ACID</span>
+          </div>
+        </div>
+
+        <div class="hero-cta-hint">
+          <span>Pressione <kbd>→</kbd> ou clique para navegar</span>
+          <button class="btn-primary-glow" onclick="presentation.nextSlide()">Iniciar Apresentação &rarr;</button>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="1">
+        <strong>Notas de Fala:</strong><br>
+        Apresentar o objetivo do ParnaEventos ao Gestor Afrânio Alex: transformar eventos municipais (Corridas, Festivais Culturais, Encontros Esportivos) em uma experiência digital moderna, sem filas caóticas, sem inscrições duplicadas e com total transparência e auditoria para a gestão pública municipal.
+      </div>
+    </section>
+
+    <!-- SLIDE 2: O Problema & Oportunidade -->
+    <section class="slide" data-slide="2" id="slide-2">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Contexto & Motivação</span>
+          <h2>O Desafio Operacional nos Eventos do Município</h2>
+          <p class="section-desc">Eventos populares em Parnamirim sofrem com o "efeito virada de lote" e gargalos operacionais no atendimento presencial.</p>
+        </div>
+
+        <div class="grid-3-col">
+          <div class="feature-card danger-accent">
+            <div class="card-icon danger">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h3>Picos de Concorrência e Vagas Fantasmas</h3>
+            <p>Milhares de cidadãos acessando simultaneamente. Sistemas frágeis sofrem race conditions (duas pessoas pegando a mesma vaga) ou quedas de servidor na abertura das inscrições.</p>
+            <ul class="clean-bullet-list">
+              <li>Inscrições além da capacidade real</li>
+              <li>Reclamações públicas e desgaste de imagem</li>
+              <li>Falta de critérios de desempate justos</li>
+            </ul>
+          </div>
+
+          <div class="feature-card warning-accent">
+            <div class="card-icon warning">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h3>Fraudes & Inscrições Duplicadas</h3>
+            <p>Participantes se inscrevendo múltiplas vezes ou ocupando vagas em dois eventos conflitantes no mesmo dia, privando outros munícipes do acesso aos eventos.</p>
+            <ul class="clean-bullet-list">
+              <li>Mesma pessoa em múltiplos eventos no mesmo dia</li>
+              <li>Falta de validação para endereço em Parnamirim</li>
+              <li>Dificuldade no cadastro de dependentes menores</li>
+            </ul>
+          </div>
+
+          <div class="feature-card success-accent">
+            <div class="card-icon success">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3>Gargalo na Entrega de Kits & Balcão</h3>
+            <p>Confusão na conferência presencial de documentos, cupons reutilizados indevidamente e falta de comprovação de quem entregou qual kit e quando.</p>
+            <ul class="clean-bullet-list">
+              <li>Uso duplicado de cupom de kit</li>
+              <li>Ausência de rastreabilidade do operador</li>
+              <li>Inscrição feita sem validação dos requisitos</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout-banner">
+          <div class="callout-icon">💡</div>
+          <div class="callout-text">
+            <strong>Premissa Estratégica para o GCTI:</strong> Não se trata apenas de criar um "formulário web", mas de construir uma <em>plataforma transacional de alta confiabilidade</em>, com regras duras no banco de dados e auditoria governamental transparente.
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="2">
+        <strong>Notas de Fala:</strong><br>
+        Enfatizar para o Afrânio que sistemas de prefeitura não podem falhar na abertura de vagas populares. A credibilidade do GCTI e da gestão municipal depende de um sistema justo, onde ninguém fure a fila e onde a capacidade seja respeitada ao milissegundo.
+      </div>
+    </section>
+
+    <!-- SLIDE 3: As 3 Decisões Estratégicas Chave -->
+    <section class="slide" data-slide="3" id="slide-3">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Definições Fundamentais</span>
+          <h2>As 3 Decisões de Negócio Consolidadas</h2>
+          <p class="section-desc">Regras macro alinhadas que determinam a integridade matemática da capacidade e dos fluxos do sistema.</p>
+        </div>
+
+        <div class="grid-3-col decisions-grid">
+          <div class="decision-box active-glow">
+            <div class="decision-number">01</div>
+            <div class="decision-badge">Controle de Capacidade</div>
+            <h3>Capacidade por Participante Individual</h3>
+            <p class="decision-statement">
+              <strong>Titular e cada dependente menor consomem 1 vaga cada um.</strong>
+            </p>
+            <div class="decision-impact">
+              <span class="impact-title">Impacto Técnico & Negócio:</span>
+              <p>Uma inscrição familiar com 1 responsável e 2 filhos reserva exatamente <strong>3 vagas</strong> no evento. Cada indivíduo possui seu registro, suas checagens de elegibilidade e seu próprio ticket.</p>
+            </div>
+            <div class="decision-footer">
+              <span class="badge-pill">Sem vagas ocultas</span>
+            </div>
+          </div>
+
+          <div class="decision-box active-glow">
+            <div class="decision-number">02</div>
+            <div class="decision-badge">Gestão da Fila</div>
+            <h3>Lista de Espera com Convocação Automática</h3>
+            <p class="decision-statement">
+              <strong>Vagas liberadas por cancelamento promovem o próximo elegível instantaneamente.</strong>
+            </p>
+            <div class="decision-impact">
+              <span class="impact-title">Impacto Técnico & Negócio:</span>
+              <p>Durante o período de inscrições abertas, se um participante cancelar (mediante senha), o sistema convoca automaticamente o 1º da fila, gerando seu ticket e enviando notificação, sem intervenção manual.</p>
+            </div>
+            <div class="decision-footer">
+              <span class="badge-pill">Fila justa FIFO</span>
+            </div>
+          </div>
+
+          <div class="decision-box active-glow">
+            <div class="decision-number">03</div>
+            <div class="decision-badge">Fechamento do Ciclo</div>
+            <h3>Encerramento Automático de Não Validadas</h3>
+            <p class="decision-statement">
+              <strong>Inscrições pendentes ao fim do prazo são fechadas sem validação posterior.</strong>
+            </p>
+            <div class="decision-impact">
+              <span class="impact-title">Impacto Técnico & Negócio:</span>
+              <p>Ao fechar o prazo estipulado pelo gestor, inscrições que não concluíram etapas ou ficaram retidas transitam para <code>CLOSED_UNVALIDATED</code>. Protege o cronograma de entrega de kits.</p>
+            </div>
+            <div class="decision-footer">
+              <span class="badge-pill">Segurança jurídica</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="distinction-box">
+          <div class="distinction-tag">Distinção Conceitual Obrigatória</div>
+          <div class="distinction-content">
+            <div class="dist-item left">
+              <strong>Inscrição Realizada (Pendente)</strong>
+              <span>Garante a reserva da vaga na contagem de capacidade enquanto aguarda a entrega e validação dos kits.</span>
+            </div>
+            <div class="dist-arrow">≠</div>
+            <div class="dist-item right">
+              <strong>Participação Confirmada</strong>
+              <span>Ocorre exclusivamente após a leitura do ticket pelo operador, conferência de identidade, termo de menores e entrega do kit.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="3">
+        <strong>Notas de Fala:</strong><br>
+        Explicar a Afrânio que essas três decisões destravaram o desenho do banco de dados relacional. Deixam o sistema previsível: capacidade é unitária por pessoa física, a fila roda sozinha de forma transparente e há um marco temporal rígido que encerra inscrições inativas.
+      </div>
+    </section>
+
+    <!-- SLIDE 4: O Fluxo Principal do Cidadão & Operador -->
+    <section class="slide" data-slide="4" id="slide-4">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Jornada Operacional</span>
+          <h2>Fluxo Completo: Da Inscrição ao Dia do Evento</h2>
+          <p class="section-desc">Processo em 7 passos projetado para máxima usabilidade do cidadão e controle rígido no balcão de atendimento.</p>
+        </div>
+
+        <div class="flow-steps-horizontal">
+          <div class="flow-step">
+            <div class="step-num">1</div>
+            <div class="step-card">
+              <div class="step-icon">🌐</div>
+              <h4>Landing Page</h4>
+              <p>Cidadão visualiza eventos disponíveis, regulamentos, faixas etárias e cronograma municipal.</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">2</div>
+            <div class="step-card">
+              <div class="step-icon">🎯</div>
+              <h4>Seleção do Evento</h4>
+              <p>Verificação de status (Aberto/Encerrado), capacidade de vagas em tempo real e modalidades.</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">3</div>
+            <div class="step-card">
+              <div class="step-icon">🔐</div>
+              <h4>Login / Cadastro</h4>
+              <p>Identificação do responsável legal. Endereço restrito a munícipes de Parnamirim/RN.</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">4</div>
+            <div class="step-card highlight-step">
+              <div class="step-icon">⚡</div>
+              <h4>Validação Severa</h4>
+              <p>Bloqueio de duplicidade e <strong>conflito de data</strong> (proibido 2 eventos no mesmo dia).</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">5</div>
+            <div class="step-card">
+              <div class="step-icon">🎫</div>
+              <h4>Geração de Tickets</h4>
+              <p>Ticket individual criptografado gerado para o titular e cada dependente menor inscrito.</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">6</div>
+            <div class="step-card highlight-step">
+              <div class="step-icon">📦</div>
+              <h4>Entrega de Kits</h4>
+              <p>Operador GCTI escaneia o ticket, confere termo de menor e valida documentos no balcão.</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">7</div>
+            <div class="step-card success-step">
+              <div class="step-icon">🏁</div>
+              <h4>Confirmado!</h4>
+              <p>Status atualizado para <code>CONFIRMED</code>. Cidadão pronto e credenciado para o evento.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-matrix-summary">
+          <div class="fms-card">
+            <span class="fms-title">Experiência do Munícipe</span>
+            <p>Interface intuitiva, sem formulários desnecessários, acompanhamento em tempo real e ticket acessível pelo celular ou impresso.</p>
+          </div>
+          <div class="fms-card">
+            <span class="fms-title">Poder do Operador no Balcão</span>
+            <p>Leitura veloz via QR Code no celular ou pistola barcode, validação em menos de 3 segundos e impedimento de fraude de tickets reutilizados.</p>
+          </div>
+          <div class="fms-card">
+            <span class="fms-title">Controle do Gestor GCTI</span>
+            <p>Dashboard de ocupação, taxa de comparecimento na entrega de kits, auditoria de operadores e reversão justificada quando necessária.</p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="4">
+        <strong>Notas de Fala:</strong><br>
+        Destacar a facilidade: o munícipe inscreve sua família em poucos cliques, mas nos bastidores o motor de regras confere conflito de data, idade dos menores e gera um ticket com hash único. No balcão, o operador só precisa de um smartphone ou leitor para validar.
+      </div>
+    </section>
+
+    <!-- SLIDE 5: Regras de Negócio Consolidadas & Casos Especiais -->
+    <section class="slide" data-slide="5" id="slide-5">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Regras do Domínio</span>
+          <h2>Regras de Negócio e Tratamento de Exceções</h2>
+          <p class="section-desc">Como o ParnaEventos responde aos cenários reais do cotidiano da administração pública.</p>
+        </div>
+
+        <div class="grid-2-col rules-grid">
+          <div class="rule-item-card">
+            <div class="rule-badge-group">
+              <span class="rule-badge rule-critical">Crítico</span>
+              <span class="rule-name">Conflito de Data no Mesmo Dia</span>
+            </div>
+            <h4>Bloqueio Rígido Multi-Evento</h4>
+            <p>O cidadão <strong>não pode se inscrever em dois eventos diferentes na mesma data</strong>, mesmo que os horários aparentem não colidir. Isso democratiza as vagas e impede a retenção ociosa de recursos públicos.</p>
+            <div class="rule-tech-pill">Validação transacional atômica no banco</div>
+          </div>
+
+          <div class="rule-item-card">
+            <div class="rule-badge-group">
+              <span class="rule-badge rule-security">Segurança</span>
+              <span class="rule-name">Cancelamento Seguro de Inscrição</span>
+            </div>
+            <h4>Exigência de Senha & Reabertura de Vagas</h4>
+            <p>Para evitar cancelamentos acidentais ou maliciosos, o participante <strong>deve digitar sua senha</strong>. Se as inscrições estiverem abertas, a vaga é imediatamente liberada para a lista de espera. Se já encerradas, apenas cancela.</p>
+            <div class="rule-tech-pill">Proteção contra ataques de terceiros</div>
+          </div>
+
+          <div class="rule-item-card">
+            <div class="rule-badge-group">
+              <span class="rule-badge rule-legal">Jurídico / Estatuto</span>
+              <span class="rule-name">Inscrição de Menores de Idade</span>
+            </div>
+            <h4>Responsabilidade Legal & Termos Assinados</h4>
+            <p>A idade mínima é definida no regulamento de cada evento. Menores devem estar vinculados a um responsável cadastrado, exigindo presença dos pais/responsáveis e assinatura de termo na entrega do kit.</p>
+            <div class="rule-tech-pill">Vínculo formal <code>participant_guardians</code></div>
+          </div>
+
+          <div class="rule-item-card">
+            <div class="rule-badge-group">
+              <span class="rule-badge rule-audit">Auditoria</span>
+              <span class="rule-name">Tentativa de Reutilização de Ticket</span>
+            </div>
+            <h4>Bloqueio e Rastreio de Fraude</h4>
+            <p>Um ticket já utilizado <strong>nunca pode ser revalidado</strong>. Qualquer segunda tentativa é sumariamente rejeitada, disparando alerta com o horário, operador e local da primeira validação.</p>
+            <div class="rule-tech-pill">Estado de ticket <code>USED</code> imutável</div>
+          </div>
+
+          <div class="rule-item-card">
+            <div class="rule-badge-group">
+              <span class="rule-badge rule-gov">Governança</span>
+              <span class="rule-name">Reversão de Validação por Gestor</span>
+            </div>
+            <h4>Ação Administrativa com Justificativa</h4>
+            <p>Apenas perfis com permissão de Gestor (ex: equipe do Afrânio) podem revogar uma validação concedida, sendo <strong>obrigatório preencher a justificativa formal</strong> que fica gravada em log de auditoria permanente.</p>
+            <div class="rule-tech-pill">Append-only audit log sem deleção física</div>
+          </div>
+
+          <div class="rule-item-card">
+            <div class="rule-badge-group">
+              <span class="rule-badge rule-notify">Comunicação</span>
+              <span class="rule-name">Alteração de Capacidade ou Cancelamento</span>
+            </div>
+            <h4>Notificação Automática e Transparência</h4>
+            <p>Se o gestor alterar a capacidade ou cancelar o evento por força maior (ex: clima), o sistema notifica os afetados por e-mail/notificação com a justificativa oficial cadastrada.</p>
+            <div class="rule-tech-pill">Mensageria assíncrona com Outbox Pattern</div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="5">
+        <strong>Notas de Fala:</strong><br>
+        Mostrar como as respostas dadas pelo gestor foram transformadas em blindagens técnicas: cancelamento exige senha, menor só com responsável, ticket usado uma vez nunca mais passa e o gestor tem superpoder de reversão com auditoria impecável.
+      </div>
+    </section>
+
+    <!-- SLIDE 6: A Máquina de Estados da Inscrição (FSM) -->
+    <section class="slide" data-slide="6" id="slide-6">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Engenharia de Software</span>
+          <h2>Máquina de Estados Finita (FSM) da Inscrição</h2>
+          <p class="section-desc">Ciclo de vida determinístico: nenhuma inscrição muda de status sem seguir uma transição autorizada.</p>
+        </div>
+
+        <div class="fsm-visual-container">
+          <!-- State Nodes Grid -->
+          <div class="state-node-board">
+            <div class="state-pill state-pending">
+              <div class="state-dot"></div>
+              <div class="state-info">
+                <strong>PENDING_VALIDATION</strong>
+                <span>Inscrito, vaga reservada, aguardando kit</span>
+              </div>
+            </div>
+
+            <div class="state-arrow-wrap">
+              <span class="arrow-label">Validação Presencial</span>
+              <span class="arrow-symbol">➔</span>
+            </div>
+
+            <div class="state-pill state-confirmed">
+              <div class="state-dot"></div>
+              <div class="state-info">
+                <strong>CONFIRMED</strong>
+                <span>Ticket lido, kit entregue, apto para o evento</span>
+              </div>
+            </div>
+
+            <div class="state-arrow-wrap">
+              <span class="arrow-label">Reversão c/ Motivo</span>
+              <span class="arrow-symbol">➔</span>
+            </div>
+
+            <div class="state-pill state-revoked">
+              <div class="state-dot"></div>
+              <div class="state-info">
+                <strong>REVOKED</strong>
+                <span>Revogado pelo Gestor GCTI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Branches -->
+          <div class="state-branches-row">
+            <div class="branch-card branch-waitlist">
+              <div class="branch-header">
+                <span class="branch-badge">Lista de Espera</span>
+                <strong>WAITLISTED</strong>
+              </div>
+              <p>Sem vaga inicial. Se surgir vaga durante inscrições abertas ➔ <code>PENDING_VALIDATION</code> automaticamente.</p>
+            </div>
+
+            <div class="branch-card branch-cancelled">
+              <div class="branch-header">
+                <span class="branch-badge">Cancelamento</span>
+                <strong>CANCELLED</strong>
+              </div>
+              <p>Ação pelo próprio participante mediante senha. Libera vaga se inscrições ainda estiverem abertas.</p>
+            </div>
+
+            <div class="branch-card branch-closed">
+              <div class="branch-header">
+                <span class="branch-badge">Expirado</span>
+                <strong>CLOSED_UNVALIDATED</strong>
+              </div>
+              <p>Prazo encerrou e participante não validou presencialmente. Bloqueio automático de confirmação.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invariants Table -->
+        <div class="invariants-table-wrap">
+          <div class="table-title">Invariantes do Sistema (Regras Matemáticas que NUNCA Podem Ser Violadas)</div>
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Invariante</th>
+                <th>Regra Rígida do Domínio</th>
+                <th>Mecanismo de Proteção</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Teto de Vagas</strong></td>
+                <td><code>Vagas Ocupadas (Pending + Confirmed) ≤ Capacidade Total</code></td>
+                <td>Bloqueio pessimista <code>SELECT FOR UPDATE</code> na capacidade</td>
+              </tr>
+              <tr>
+                <td><strong>Unicidade no Evento</strong></td>
+                <td>Um cidadão só pode ter 1 inscrição por evento</td>
+                <td>Constraint <code>UNIQUE (event_id, participant_id)</code></td>
+              </tr>
+              <tr>
+                <td><strong>Conflito de Data</strong></td>
+                <td>Inscrição proibida se já houver evento ativo na mesma data</td>
+                <td>Verificação transacional com lock do participante</td>
+              </tr>
+              <tr>
+                <td><strong>Uso Único de Ticket</strong></td>
+                <td>Ticket só pode mudar de <code>ISSUED</code> para <code>USED</code> uma vez</td>
+                <td>Operação atômica <code>UPDATE tickets WHERE status = 'ISSUED'</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="6">
+        <strong>Notas de Fala:</strong><br>
+        Explicar a FSM (Finite State Machine). A regra mais importante para o gestor entender é que o banco não permite pular etapas: ninguém vira CONFIRMED sem passar pelo balcão, e ninguém que expirou (CLOSED_UNVALIDATED) pode ser reaberto sem auditoria.
+      </div>
+    </section>
+
+    <!-- SLIDE 7: Arquitetura Técnica — Monólito Modular & SOLID -->
+    <section class="slide" data-slide="7" id="slide-7">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Engenharia de Solução</span>
+          <h2>Arquitetura Recomendada: Monólito Modular & SOLID</h2>
+          <p class="section-desc">Por que a simplicidade bem estruturada supera os microsserviços no estágio atual do projeto.</p>
+        </div>
+
+        <div class="arch-split-layout">
+          <div class="arch-modules-grid">
+            <div class="module-card">
+              <div class="mod-icon">👤</div>
+              <h4>Identidade & Acesso</h4>
+              <p>Contas, autenticação segura, perfis de munícipe, operadores e gestores GCTI.</p>
+            </div>
+
+            <div class="module-card">
+              <div class="mod-icon">👨‍👩‍👧</div>
+              <h4>Participantes & Guardiões</h4>
+              <p>Dados civis, endereço em Parnamirim, dependentes menores e termos de responsabilidade.</p>
+            </div>
+
+            <div class="module-card">
+              <div class="mod-icon">📅</div>
+              <h4>Eventos & Regulamentos</h4>
+              <p>Datas, modalidades, faixas etárias, etapas de entrega de kits e capacidade de vagas.</p>
+            </div>
+
+            <div class="module-card highlight-mod">
+              <div class="mod-icon">⚡</div>
+              <h4>Núcleo de Inscrições & Fila</h4>
+              <p>Motor de regras, concorrência, lista de espera automática e transações atômicas.</p>
+            </div>
+
+            <div class="module-card">
+              <div class="mod-icon">🎟️</div>
+              <h4>Tickets & Validação</h4>
+              <p>Geração de hash token, QR Code seguro, leitura presencial e cancelamento de tickets.</p>
+            </div>
+
+            <div class="module-card">
+              <div class="mod-icon">🛡️</div>
+              <h4>Auditoria & Outbox</h4>
+              <p>Append-only logs de todas as ações, mensagens para disparo assíncrono de e-mails/alertas.</p>
+            </div>
+          </div>
+
+          <div class="arch-benefits-card">
+            <h3>Por Que Esta Arquitetura é Ideal para o GCTI?</h3>
+            <ul class="benefit-list">
+              <li>
+                <div class="b-icon">🎯</div>
+                <div>
+                  <strong>Consistência ACID Nativa:</strong>
+                  <span>Sem inconsistências entre bancos diferentes. A reserva da vaga e a geração do ticket acontecem na mesma transação.</span>
+                </div>
+              </li>
+              <li>
+                <div class="b-icon">💰</div>
+                <div>
+                  <strong>Menor Custo e Complexidade de Infra:</strong>
+                  <span>Não exige Kubernetes complexo ou dezenas de microsserviços. Roda de forma econômica em infraestrutura da prefeitura ou cloud.</span>
+                </div>
+              </li>
+              <li>
+                <div class="b-icon">🚀</div>
+                <div>
+                  <strong>Fácil Evolução (SOLID):</strong>
+                  <span>Módulos desacoplados por interfaces. Se no futuro o módulo de Tickets precisar virar um serviço separado, a extração é natural.</span>
+                </div>
+              </li>
+              <li>
+                <div class="b-icon">🔒</div>
+                <div>
+                  <strong>Conformidade com LGPD:</strong>
+                  <span>Isolamento e controle de acesso rígido aos dados dos cidadãos e seus filhos menores.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="7">
+        <strong>Notas de Fala:</strong><br>
+        Mostrar visão estratégica para Afrânio: muitos projetos públicos falham tentando criar microsserviços desde o dia 1. O Monólito Modular oferece velocidade de entrega, banco único com integridade atômica absoluta e facilidade de manutenção para a equipe do GCTI.
+      </div>
+    </section>
+
+    <!-- SLIDE 8: As 3 Transações Críticas no Banco de Dados -->
+    <section class="slide" data-slide="8" id="slide-8">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Segurança Concorrente</span>
+          <h2>O Coração Técnico: 3 Transações Críticas (ACID)</h2>
+          <p class="section-desc">Garantia matemática de que requisições simultâneas nunca corromperão vagas ou ingressos.</p>
+        </div>
+
+        <div class="transactions-container">
+          <!-- Transação A -->
+          <div class="tx-card">
+            <div class="tx-badge">Transação A</div>
+            <h3>Inscrição com Bloqueio Concorrente</h3>
+            <p class="tx-desc">Quando 500 pessoas disputam a última vaga disponível:</p>
+            <div class="tx-pipeline">
+              <div class="pipe-step">1. Inicia Transação DB</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step highlight">2. Lock Pessimista no Participante</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step">3. Checa Conflito de Data no Mesmo Dia</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step highlight">4. SELECT FOR UPDATE no Contador de Vagas</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-branch">
+                <span class="pipe-sub yes">Vaga Livre? → Cria Inscrição + Ticket</span>
+                <span class="pipe-sub no">Lotado? → Cria Entrada na Lista de Espera</span>
+              </div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step success">5. Grava Auditoria e Commit Atômico</div>
+            </div>
+          </div>
+
+          <!-- Transação B -->
+          <div class="tx-card">
+            <div class="tx-badge">Transação B</div>
+            <h3>Cancelamento & Convocação Instantânea</h3>
+            <p class="tx-desc">Ao cancelar, a fila anda sem delay e sem intervenção humana:</p>
+            <div class="tx-pipeline">
+              <div class="pipe-step">1. Valida Senha do Usuário</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step">2. Marca Inscrição como <code>CANCELLED</code></div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step highlight">3. Inscrições Ainda Abertas?</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-branch">
+                <span class="pipe-sub yes">Sim: Busca 1º da Waitlist (FIFO)</span>
+                <span class="pipe-sub no">Não: Não Reabre Vaga (Regra de Negócio)</span>
+              </div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step highlight">4. Promove para PENDING e Emite Ticket</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step success">5. Agenda Notificação e E-mail no Outbox</div>
+            </div>
+          </div>
+
+          <!-- Transação C -->
+          <div class="tx-card">
+            <div class="tx-badge">Transação C</div>
+            <h3>Validação de Kit no Balcão (Operador)</h3>
+            <p class="tx-desc">Prevenção contra tentativa de leitura dupla do mesmo cupom:</p>
+            <div class="tx-pipeline">
+              <div class="pipe-step">1. Leitura do QR Code / Token Hash</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step highlight">2. Lock Exclusivo no Ticket</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step">3. Checa: <code>status == 'ISSUED'</code>?</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-branch">
+                <span class="pipe-sub yes">Sim: Atualiza para <code>USED</code></span>
+                <span class="pipe-sub no">Não: Rejeita ("Já Utilizado às HH:MM")</span>
+              </div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step success">4. Inscrição vira <code>CONFIRMED</code></div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-step">5. Registra Operador e Commit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="8">
+        <strong>Notas de Fala:</strong><br>
+        Este slide é a prova do rigor de engenharia: explicamos para o Afrânio que tudo é ACID. Não existe a menor possibilidade de uma vaga ser dada a dois munícipes ou de um ticket ser validado duas vezes em balcões diferentes simultaneamente.
+      </div>
+    </section>
+
+    <!-- SLIDE 9: Modelo de Dados Relacional (PostgreSQL) -->
+    <section class="slide" data-slide="9" id="slide-9">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Engenharia de Dados</span>
+          <h2>Modelo Relacional de Alto Desempenho</h2>
+          <p class="section-desc">Entidades normalizadas, constraints de integridade e separação estrita de responsabilidades.</p>
+        </div>
+
+        <div class="db-schema-layout">
+          <div class="tables-visual-grid">
+            <div class="db-table-card">
+              <div class="table-name">accounts</div>
+              <ul class="col-list">
+                <li class="pk"><span>id</span> <small>UUID PK</small></li>
+                <li><span>email</span> <small>VARCHAR(254) UNIQUE</small></li>
+                <li><span>password_hash</span> <small>TEXT</small></li>
+                <li><span>status</span> <small>ACTIVE | BLOCKED</small></li>
+              </ul>
+            </div>
+
+            <div class="db-table-card">
+              <div class="table-name">participants</div>
+              <ul class="col-list">
+                <li class="pk"><span>id</span> <small>UUID PK</small></li>
+                <li class="fk"><span>account_id</span> <small>UUID FK</small></li>
+                <li><span>full_name</span> <small>VARCHAR(200)</small></li>
+                <li><span>birth_date</span> <small>DATE</small></li>
+                <li><span>phone</span> <small>VARCHAR(30)</small></li>
+              </ul>
+            </div>
+
+            <div class="db-table-card">
+              <div class="table-name">participant_guardians</div>
+              <ul class="col-list">
+                <li class="pk"><span>guardian_id</span> <small>UUID PK, FK</small></li>
+                <li class="pk"><span>dependent_id</span> <small>UUID PK, FK</small></li>
+                <li><span>relationship</span> <small>VARCHAR(50)</small></li>
+                <li><span>verified_at</span> <small>TIMESTAMPTZ</small></li>
+              </ul>
+            </div>
+
+            <div class="db-table-card highlight-border">
+              <div class="table-name">events</div>
+              <ul class="col-list">
+                <li class="pk"><span>id</span> <small>UUID PK</small></li>
+                <li><span>name</span> <small>VARCHAR(200)</small></li>
+                <li><span>event_date</span> <small>DATE NOT NULL</small></li>
+                <li><span>reg_opens_at</span> <small>TIMESTAMPTZ</small></li>
+                <li><span>reg_closes_at</span> <small>TIMESTAMPTZ</small></li>
+                <li><span>capacity</span> <small>INT CHECK(>=0)</small></li>
+              </ul>
+            </div>
+
+            <div class="db-table-card highlight-border">
+              <div class="table-name">registrations</div>
+              <ul class="col-list">
+                <li class="pk"><span>id</span> <small>UUID PK</small></li>
+                <li class="fk"><span>event_id</span> <small>UUID FK</small></li>
+                <li class="fk"><span>participant_id</span> <small>UUID FK</small></li>
+                <li><span>status</span> <small>VARCHAR(30)</small></li>
+                <li class="unique"><span>UNIQUE(event_id, participant_id)</span></li>
+              </ul>
+            </div>
+
+            <div class="db-table-card">
+              <div class="table-name">tickets</div>
+              <ul class="col-list">
+                <li class="pk"><span>id</span> <small>UUID PK</small></li>
+                <li class="fk"><span>registration_id</span> <small>UUID FK UNIQUE</small></li>
+                <li><span>token_hash</span> <small>TEXT UNIQUE</small></li>
+                <li><span>status</span> <small>ISSUED | USED | REVOKED</small></li>
+                <li><span>used_at</span> <small>TIMESTAMPTZ</small></li>
+              </ul>
+            </div>
+
+            <div class="db-table-card">
+              <div class="table-name">waitlist_entries</div>
+              <ul class="col-list">
+                <li class="pk"><span>id</span> <small>UUID PK</small></li>
+                <li class="fk"><span>registration_id</span> <small>UUID FK UNIQUE</small></li>
+                <li><span>queue_position</span> <small>BIGINT NOT NULL</small></li>
+                <li><span>status</span> <small>WAITING | OFFERED</small></li>
+              </ul>
+            </div>
+
+            <div class="db-table-card">
+              <div class="table-name">audit_logs (Imutável)</div>
+              <ul class="col-list">
+                <li class="pk"><span>id</span> <small>UUID PK</small></li>
+                <li><span>actor_account_id</span> <small>UUID</small></li>
+                <li><span>action</span> <small>VARCHAR(100)</small></li>
+                <li><span>reason</span> <small>TEXT</small></li>
+                <li><span>metadata</span> <small>JSONB</small></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="db-highlights-sidebar">
+            <div class="db-highlight-item">
+              <strong>Hash Criptográfico de Ticket</strong>
+              <p>O token do ticket só é exibido na tela do munícipe. No banco gravamos apenas o <code>SHA-256 hash</code>, impedindo vazamentos ou falsificações internas.</p>
+            </div>
+            <div class="db-highlight-item">
+              <strong>Índices Parciais Inteligentes</strong>
+              <p>Índices dedicados para buscar <code>registrations WHERE status = 'PENDING_VALIDATION'</code> e posições da <code>waitlist_entries</code> com latência submilisegundo.</p>
+            </div>
+            <div class="db-highlight-item">
+              <strong>Auditoria Estruturada em JSONB</strong>
+              <p>Rastreia snapshot do estado anterior e posterior em cada cancelamento, reversão ou alteração de capacidade.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="9">
+        <strong>Notas de Fala:</strong><br>
+        Apresentar o modelo ao gestor: veja que a conta (account) é desacoplada do participante. Um pai tem 1 conta e cadastra 3 participantes (ele e 2 filhos). Cada filho ganha seu registro e seu ticket individual, com vínculo registrado em participant_guardians.
+      </div>
+    </section>
+
+    <!-- SLIDE 10: Estratégia de Escala & Resiliência a Picos -->
+    <section class="slide" data-slide="10" id="slide-10">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Desempenho & Confiabilidade</span>
+          <h2>Estratégia de Escala: Protegendo o Sistema nos Picos</h2>
+          <p class="section-desc">Como o ParnaEventos se comporta quando 10.000 munícipes acessam no primeiro segundo de abertura.</p>
+        </div>
+
+        <div class="scaling-architecture-grid">
+          <div class="scale-tier-card">
+            <div class="tier-badge">Nível 1 • Borda</div>
+            <h4>Fila Virtual & Rate Limit</h4>
+            <div class="tier-icon">🛡️</div>
+            <p>Controla a taxa de entrada no momento exato do lançamento do evento. Impede que robôs ou cliques frenéticos sobrecarreguem o servidor.</p>
+            <span class="tier-sub">Proteção contra Denial of Service involuntário</span>
+          </div>
+
+          <div class="scale-tier-card">
+            <div class="tier-badge">Nível 2 • Leitura</div>
+            <h4>Cache Inteligente (Páginas & Regulamentos)</h4>
+            <div class="tier-icon">⚡</div>
+            <p>Landing page e informações de eventos cacheadas em memória (Redis/CDN). 90% do tráfego de visualização não toca o banco relacional.</p>
+            <span class="tier-sub">Tempo de resposta &lt; 20ms para navegação</span>
+          </div>
+
+          <div class="scale-tier-card">
+            <div class="tier-badge">Nível 3 • Transacional</div>
+            <h4>Pool Concorrente Otimizado (Postgres)</h4>
+            <div class="tier-icon">🗄️</div>
+            <p>Apenas as requisições de finalização de inscrição disputam a transação de capacidade, garantindo atomicidade com tempo de lock mínimo (&lt; 5ms).</p>
+            <span class="tier-sub">Zero risco de overbooking</span>
+          </div>
+
+          <div class="scale-tier-card">
+            <div class="tier-badge">Nível 4 • Assíncrono</div>
+            <h4>Outbox Pattern & Background Workers</h4>
+            <div class="tier-icon">📨</div>
+            <p>Disparo de e-mails, WhatsApp/SMS e geração de PDFs pesados é delegado para filas de processamento assíncrono em segundo plano.</p>
+            <span class="tier-sub">A resposta ao cidadão não fica travada</span>
+          </div>
+        </div>
+
+        <div class="resilience-metric-banner">
+          <div class="metric-item">
+            <span class="m-val">100%</span>
+            <span class="m-lbl">Integridade de Vagas</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="m-val">0</span>
+            <span class="m-lbl">Inscrições Duplicadas</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="m-val">&lt; 3s</span>
+            <span class="m-lbl">Tempo de Validação no Kit</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="m-val">Auditável</span>
+            <span class="m-lbl">Conformidade e Transparência</span>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="10">
+        <strong>Notas de Fala:</strong><br>
+        Responder à preocupação clássica de qualquer gestor de TI: "o sistema vai aguentar a virada de lote?". Mostrar que dividimos a carga: a navegação é cacheada, a escrita é atômica com locks ultrarrápidos e tarefas pesadas (envio de e-mails) vão para filas em background.
+      </div>
+    </section>
+
+    <!-- SLIDE 11: Roadmap de Implementação em 5 Fases -->
+    <section class="slide" data-slide="11" id="slide-11">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="section-tag">Plano de Execução</span>
+          <h2>Roadmap de Desenvolvimento & Entregas</h2>
+          <p class="section-desc">Estratégia iterativa dividida em 5 fases planejadas para rápida validação e segurança operacional.</p>
+        </div>
+
+        <div class="roadmap-timeline">
+          <div class="roadmap-milestone">
+            <div class="rm-badge">Fase 1 • Fundação</div>
+            <div class="rm-content">
+              <h4>Banco de Dados & Domínio</h4>
+              <p>Criação do schema PostgreSQL, migrations, entidades de domínio, autenticação segura e setup do monólito modular.</p>
+              <div class="rm-deliverable">Entrega: Banco e testes de integridade</div>
+            </div>
+          </div>
+
+          <div class="roadmap-milestone">
+            <div class="rm-badge">Fase 2 • Inscrições</div>
+            <div class="rm-content">
+              <h4>Regras de Negócio & Anti-Duplicidade</h4>
+              <p>Módulo de eventos, cadastro de dependentes, trava de conflito de datas no mesmo dia e validação de munícipe de Parnamirim.</p>
+              <div class="rm-deliverable">Entrega: Fluxo completo de inscrição online</div>
+            </div>
+          </div>
+
+          <div class="roadmap-milestone">
+            <div class="rm-badge">Fase 3 • Fila & Vagas</div>
+            <div class="rm-content">
+              <h4>Capacidade & Lista de Espera Automática</h4>
+              <p>Implementação do cancelamento protegido por senha e motor de convocação automática do 1º da fila em lote de concorrência.</p>
+              <div class="rm-deliverable">Entrega: Motor de concorrência e fila FIFO</div>
+            </div>
+          </div>
+
+          <div class="roadmap-milestone">
+            <div class="rm-badge">Fase 4 • Operação</div>
+            <div class="rm-content">
+              <h4>Tickets & App do Balcão de Kits</h4>
+              <p>Geração de QR Code/Hash, interface web/mobile para operadores biparem tickets, conferência de termos e reversão justificada por gestor.</p>
+              <div class="rm-deliverable">Entrega: Sistema do operador de entrega de kits</div>
+            </div>
+          </div>
+
+          <div class="roadmap-milestone highlight-milestone">
+            <div class="rm-badge">Fase 5 • Go-Live</div>
+            <div class="rm-content">
+              <h4>Jobs Automáticos, Carga & Lançamento</h4>
+              <p>Job de expiração de inscrições não validadas, fila virtual de proteção, testes de estresse de 5.000 req/s e treinamento da equipe.</p>
+              <div class="rm-deliverable">Entrega: Evento piloto em produção com segurança</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="11">
+        <strong>Notas de Fala:</strong><br>
+        Mostrar cronograma realista: começamos pelo núcleo sólido (Fase 1 e 2), depois o motor de fila (Fase 3), as ferramentas operacionais de campo (Fase 4) e fechamos com testes de estresse antes de colocar o primeiro evento real no ar.
+      </div>
+    </section>
+
+    <!-- SLIDE 12: Conclusão & Próximos Passos -->
+    <section class="slide" data-slide="12" id="slide-12">
+      <div class="slide-content slide-conclusion">
+        <div class="conclusion-badge">Alinhamento Estratégico</div>
+        <h2>Próximos Passos para a Gestão do GCTI</h2>
+        <p class="conclusion-lead">
+          O ParnaEventos posiciona Parnamirim na vanguarda da transformação digital com integridade, equidade no acesso aos eventos e modernidade para o munícipe.
+        </p>
+
+        <div class="conclusion-cards-grid">
+          <div class="conc-card">
+            <div class="conc-num">1</div>
+            <h4>Validação do Esquema SQL</h4>
+            <p>Aprovação formal do modelo relacional e das constraints de integridade apresentadas.</p>
+          </div>
+
+          <div class="conc-card">
+            <div class="conc-num">2</div>
+            <h4>PoC da Transação Concorrente</h4>
+            <p>Execução de teste de carga simulando 1.000 requisições simultâneas disputando 10 vagas finais.</p>
+          </div>
+
+          <div class="conc-card">
+            <div class="conc-num">3</div>
+            <h4>Desenvolvimento da Fase 1</h4>
+            <p>Setup do ambiente do GCTI e início da codificação dos contratos e serviços de domínio.</p>
+          </div>
+        </div>
+
+        <div class="executive-signoff-card">
+          <div class="signoff-quote">
+            "A tecnologia pública municipal atinge seu propósito quando assegura que cada cidadão tenha oportunidade justa, ágil e transparente de participar das realizações da sua cidade."
+          </div>
+          <div class="signoff-footer">
+            <div class="author-block">
+              <strong>Equipe de Engenharia & Inovação</strong>
+              <span>GCTI — Prefeitura de Parnamirim</span>
+            </div>
+            <div class="interactive-prompt">
+              <button class="btn-primary-glow" id="btnOpenSimulatorFromEnd">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Abrir Demonstração / Simulador Interativo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes" data-for="12">
+        <strong>Notas de Fala:</strong><br>
+        Encerrar convidando o Afrânio Alex a testar o simulador interativo em tempo real para ver na prática o bloqueio de data, o cancelamento com senha e a convocação instantânea da lista de espera.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Presentation Navigation Floating Bar -->
+  <footer class="app-footer">
+    <div class="footer-left">
+      <span class="hotkey-tip"><kbd>←</kbd> <kbd>→</kbd> Navegar</span>
+      <span class="hotkey-tip"><kbd>Espaço</kbd> Avançar</span>
+      <span class="hotkey-tip"><kbd>S</kbd> Simulador</span>
+      <span class="hotkey-tip"><kbd>N</kbd> Notas</span>
+      <span class="hotkey-tip"><kbd>F</kbd> Tela Cheia</span>
+    </div>
+
+    <div class="footer-center">
+      <div class="nav-control-pills">
+        <button class="pill-btn" id="btnPrev" title="Slide Anterior (Seta Esquerda)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Anterior</span>
+        </button>
+
+        <span class="slide-counter-bubble" id="slideBubble">1 / 12</span>
+
+        <button class="pill-btn primary" id="btnNext" title="Próximo Slide (Seta Direita / Espaço)">
+          <span>Próximo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="footer-right">
+      <span class="footer-copyright">GCTI Parnamirim © 2026 • Documento Oficial de Arquitetura</span>
+    </div>
+  </footer>
+
+  <!-- Slide Overview Modal (Grid View) -->
+  <div class="modal-backdrop" id="modalOverview">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3>Índice da Apresentação</h3>
+        <button class="btn-close" id="btnCloseOverview">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="slides-grid-index" id="slidesGridIndex">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Speaker Notes Modal / Panel -->
+  <div class="notes-panel" id="notesPanel">
+    <div class="notes-header">
+      <h4>Notas do Apresentador (Slide <span id="notesSlideNumber">1</span>)</h4>
+      <button class="btn-close-sm" id="btnCloseNotes">&times;</button>
+    </div>
+    <div class="notes-body" id="notesContent">
+      Apresentação ao Gestor Afrânio Alex...
+    </div>
+  </div>
+
+  <!-- LIVE SIMULATOR MODAL (Interactive Demo for the Manager!) -->
+  <div class="modal-backdrop" id="modalSimulator">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-header">
+        <div class="sim-header-title">
+          <span class="pulse-dot"></span>
+          <h3>Simulador Interativo de Regras de Negócio & Concorrência</h3>
+        </div>
+        <button class="btn-close" id="btnCloseSimulator">&times;</button>
+      </div>
+      <div class="modal-body simulator-body">
+        <p class="sim-intro">
+          Demonstração em tempo real para o Gestor Afrânio Alex das 4 regras críticas implementadas pelo motor do ParnaEventos.
+        </p>
+
+        <!-- Scenario Tabs -->
+        <div class="sim-tabs">
+          <button class="sim-tab-btn active" data-scenario="duplicidade">1. Conflito de Data no Mesmo Dia</button>
+          <button class="sim-tab-btn" data-scenario="fila">2. Capacidade & Lista de Espera Automática</button>
+          <button class="sim-tab-btn" data-scenario="cancelamento">3. Cancelamento Seguro com Senha</button>
+          <button class="sim-tab-btn" data-scenario="ticket">4. Validação & Anti-Reutilização de Ticket</button>
+        </div>
+
+        <!-- Scenario 1: Conflito de Data -->
+        <div class="sim-scenario-pane active" id="pane-duplicidade">
+          <div class="sim-card-split">
+            <div class="sim-controls">
+              <h4>Cenário: Cidadão tentando se inscrever em 2 eventos na mesma data</h4>
+              <p class="text-muted">Data simulada: <strong>25/11/2026</strong> (Domingo)</p>
+              
+              <div class="form-group">
+                <label>Participante Ativo:</label>
+                <div class="input-fake">Maria Silva (CPF: 045.***.***-89) • Munícipe de Parnamirim</div>
+              </div>
+
+              <div class="events-choice-box">
+                <div class="event-choice-item">
+                  <div class="ec-info">
+                    <strong>Evento A: Corrida da Emancipação de Parnamirim (5km)</strong>
+                    <span>Data: 25/11/2026 • 07:00</span>
+                  </div>
+                  <span class="badge-status enrolled">Inscrição Ativa</span>
+                </div>
+
+                <div class="event-choice-item">
+                  <div class="ec-info">
+                    <strong>Evento B: Festival Gastronômico de Parnamirim</strong>
+                    <span>Data: 25/11/2026 • 18:00</span>
+                  </div>
+                  <button class="btn-sm btn-primary" id="btnSimTryEnrollSameDay">Tentar Inscrição no Evento B</button>
+                </div>
+              </div>
+
+              <button class="btn-outline-sm" id="btnResetSameDay">Resetar Cenário</button>
+            </div>
+
+            <div class="sim-terminal">
+              <div class="terminal-bar">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="term-title">Log do Servidor Transacional</span>
+              </div>
+              <div class="term-output" id="termOutputSameDay">
+                <div class="line sys">[SISTEMA] Aguardando ação do usuário...</div>
+                <div class="line info">[INFO] Maria Silva já possui inscrição ativa no Evento A para a data 25/11/2026.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 2: Capacidade & Fila -->
+        <div class="sim-scenario-pane" id="pane-fila">
+          <div class="sim-card-split">
+            <div class="sim-controls">
+              <h4>Cenário: Evento com 3 vagas totais</h4>
+              
+              <div class="capacity-gauge-box">
+                <div class="gauge-header">
+                  <span>Ocupação do Evento:</span>
+                  <strong id="simCapCount">3 / 3 (LOTADO)</strong>
+                </div>
+                <div class="gauge-track">
+                  <div class="gauge-fill" id="simCapBar" style="width: 100%;"></div>
+                </div>
+              </div>
+
+              <div class="form-group mt-3">
+                <label>Fila de Espera Ativa (Ordem de Chegada):</label>
+                <ol class="waitlist-ui-list" id="simWaitlistUI">
+                  <li><strong>1º</strong> Carlos Eduardo (Aguardando vaga)</li>
+                  <li><strong>2º</strong> Juliana Medeiros (Aguardando vaga)</li>
+                </ol>
+              </div>
+
+              <div class="actions-row mt-3">
+                <button class="btn-primary" id="btnSimAddWaitlist">Inscrever Novo Cidadão (Vai p/ Fila)</button>
+                <button class="btn-danger" id="btnSimFreeSlot">Simular Cancelamento de Vaga (Titular)</button>
+              </div>
+            </div>
+
+            <div class="sim-terminal">
+              <div class="terminal-bar">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="term-title">Motor de Concorrência & Fila</span>
+              </div>
+              <div class="term-output" id="termOutputFila">
+                <div class="line sys">[STATUS] Evento lotado. Inscrições entram automaticamente na fila de espera.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 3: Cancelamento com Senha -->
+        <div class="sim-scenario-pane" id="pane-cancelamento">
+          <div class="sim-card-split">
+            <div class="sim-controls">
+              <h4>Cenário: Cancelamento Seguro com Validação de Senha</h4>
+              <p class="text-muted">Apenas o próprio cidadão munido de senha pode cancelar para liberar vaga.</p>
+
+              <div class="form-group">
+                <label>Inscrição Selecionada:</label>
+                <div class="input-fake">#REG-88421 • Participante: Roberto Costa (Parnamirim)</div>
+              </div>
+
+              <div class="form-group">
+                <label for="simCancelPassword">Digite a Senha da Conta (Teste: <code>parnamirim123</code>):</label>
+                <input type="password" id="simCancelPassword" class="sim-input" placeholder="Digite a senha...">
+              </div>
+
+              <div class="form-check-group">
+                <label>
+                  <input type="checkbox" id="simRegsOpenCheck" checked>
+                  Período de Inscrições Aberto? (Se desmarcado, encerrou)
+                </label>
+              </div>
+
+              <div class="actions-row mt-3">
+                <button class="btn-danger" id="btnSimSubmitCancel">Confirmar Cancelamento de Inscrição</button>
+              </div>
+            </div>
+
+            <div class="sim-terminal">
+              <div class="terminal-bar">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="term-title">Log de Cancelamento & Auditoria</span>
+              </div>
+              <div class="term-output" id="termOutputCancel">
+                <div class="line sys">[PRONTO] Insira a senha cadastrada para testar a validação de cancelamento.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 4: Ticket Único -->
+        <div class="sim-scenario-pane" id="pane-ticket">
+          <div class="sim-card-split">
+            <div class="sim-controls">
+              <h4>Cenário: Leitura de Ticket no Balcão de Kits pelo Operador</h4>
+              
+              <div class="ticket-preview-card" id="simTicketCard">
+                <div class="tp-header">
+                  <span>PREFEITURA DE PARNAMIRIM • TICKET DE KIT</span>
+                  <span class="tp-status" id="simTicketStatusBadge">ISSUED (VÁLIDO)</span>
+                </div>
+                <div class="tp-body">
+                  <div class="tp-qr">
+                    <div class="mock-qr">QR CODE</div>
+                  </div>
+                  <div class="tp-details">
+                    <div><strong>Titular:</strong> Ana Clara Souza</div>
+                    <div><strong>Dependente:</strong> Lucas Souza (9 anos - Autorizado)</div>
+                    <div><strong>Token Hash:</strong> <code id="simTicketHash">e3b0c442...89b1</code></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="actions-row mt-3">
+                <button class="btn-primary" id="btnSimScanTicket">Operador: Bipar e Validar Entrega de Kit</button>
+                <button class="btn-outline-sm" id="btnSimRevertTicket">Gestor GCTI: Revogar Validação c/ Motivo</button>
+                <button class="btn-outline-sm" id="btnSimResetTicket">Resetar Ticket</button>
+              </div>
+            </div>
+
+            <div class="sim-terminal">
+              <div class="terminal-bar">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="term-title">Validação do Balcão (Operador ID: #OP-14)</span>
+              </div>
+              <div class="term-output" id="termOutputTicket">
+                <div class="line sys">[LEITOR] Aguardando leitura do QR Code do participante...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
