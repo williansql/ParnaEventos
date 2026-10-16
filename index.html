@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ParnaEventos — Proposta Arquitetural & Regras de Negócio | GCTI Parnamirim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>ParnaEventos — Plataforma Municipal de Eventos | GCTI Parnamirim</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +14,10 @@
 </head>
 <body class="theme-dark">
 
-  <!-- Top Progress Bar -->
+  <!-- Top Progress Bar (Active in Presentation Mode) -->
   <div class="presentation-progress-bar" id="progressBar"></div>
 
-  <!-- Executive Header -->
+  <!-- Executive Main Header -->
   <header class="app-header">
     <div class="header-left">
       <div class="brand-badge">
@@ -26,48 +26,53 @@
       </div>
       <div class="project-tag">
         <span class="pulse-dot"></span>
-        <strong>ParnaEventos</strong> <span class="version-tag">v1.0 Proposta</span>
+        <strong>ParnaEventos</strong>
       </div>
     </div>
 
-    <div class="header-center">
-      <span class="slide-indicator" id="slideIndicator">01 / 12</span>
+    <!-- Mode Switcher: Apresentação vs Sistema em Ação -->
+    <div class="header-mode-switch">
+      <button class="mode-switch-btn active" id="btnModePresentation" title="Modo Apresentação Executiva">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <span>Apresentação Executiva</span>
+      </button>
+
+      <button class="mode-switch-btn highlight-prototype" id="btnModePrototype" title="Ver Sistema Funcional na Prática">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <span>Sistema em Ação (Protótipo)</span>
+      </button>
     </div>
 
     <div class="header-right">
-      <button class="nav-icon-btn" id="btnNotes" title="Notas do Apresentador [Tecla N]">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-        <span class="btn-label">Notas</span>
-      </button>
+      <span class="slide-indicator" id="slideIndicator">01 / 12</span>
 
-      <button class="nav-icon-btn" id="btnSimulator" title="Abrir Simulador Interativo [Tecla S]">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-        <span class="btn-label highlight">Simulador Live</span>
+      <button class="nav-icon-btn" id="btnNotes" title="Notas do Apresentador [Tecla N]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        <span class="btn-label-text">Notas</span>
       </button>
 
       <button class="nav-icon-btn" id="btnOverview" title="Grade de Slides [Tecla G]">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
       </button>
 
       <button class="nav-icon-btn" id="btnFullscreen" title="Tela Cheia [Tecla F]">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
       </button>
     </div>
   </header>
 
-  <!-- Main Presentation Viewport -->
-  <main class="presentation-viewport" id="viewport">
+  <!-- =========================================================================
+       VIEW 1: APRESENTAÇÃO EXECUTIVA (12 SLIDES VISUAIS & FUNCIONAIS)
+       ========================================================================= -->
+  <main class="presentation-viewport active-view" id="presentationView">
 
     <!-- SLIDE 1: Capa Executiva -->
     <section class="slide active" data-slide="1" id="slide-1">
       <div class="slide-content slide-hero">
         <div class="hero-badge-row">
-          <span class="hero-badge badge-primary">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            Iniciativa Estratégica Municipal
-          </span>
+          <span class="hero-badge badge-primary">Iniciativa Estratégica Municipal</span>
           <span class="hero-badge badge-cyan">GCTI Parnamirim</span>
-          <span class="hero-badge badge-emerald">Arquitetura de Alta Concorrência</span>
+          <span class="hero-badge badge-emerald">Governança Digital & Vagas Justas</span>
         </div>
 
         <h1 class="hero-title">
@@ -76,7 +81,7 @@
         </h1>
 
         <p class="hero-lead">
-          Concepção técnica, arquitetura de domínio escalável e consolidação de regras de negócio para gestão de inscrições públicas com consistência transacional e auditoria completa.
+          Uma solução moderna e prática para a gestão pública de inscrições, distribuição de vagas sem filas caóticas, controle de dependentes menores e validação presencial de kits com auditoria completa.
         </p>
 
         <div class="hero-meta-card">
@@ -95,76 +100,70 @@
 
           <div class="meta-item">
             <span class="meta-label">Foco Central:</span>
-            <span class="meta-text">Prevenção de duplicidades, integridade de vagas, dependentes menores e validação presencial de kits.</span>
+            <span class="meta-text">Usabilidade do cidadão, regras municipais duras (sem duplicidade), app ágil para o operador de kit e controle do gestor.</span>
           </div>
 
           <div class="meta-divider"></div>
 
           <div class="meta-item">
-            <span class="meta-label">Padrão Arquitetural:</span>
-            <span class="meta-tag-tech">DDD Pragmático</span>
-            <span class="meta-tag-tech">Monólito Modular</span>
-            <span class="meta-tag-tech">PostgreSQL ACID</span>
+            <span class="meta-label">Experimente Agora:</span>
+            <button class="btn-primary-sm-glow" id="btnHeroGoToPrototype">
+              Abrir Sistema em Ação &rarr;
+            </button>
           </div>
         </div>
 
         <div class="hero-cta-hint">
-          <span>Pressione <kbd>→</kbd> ou clique para navegar</span>
+          <span>Use as setas <kbd>→</kbd> <kbd>←</kbd> do teclado para navegar nos slides ou alterne para o protótipo no topo.</span>
           <button class="btn-primary-glow" onclick="presentation.nextSlide()">Iniciar Apresentação &rarr;</button>
         </div>
       </div>
       <div class="speaker-notes" data-for="1">
-        <strong>Notas de Fala:</strong><br>
-        Apresentar o objetivo do ParnaEventos ao Gestor Afrânio Alex: transformar eventos municipais (Corridas, Festivais Culturais, Encontros Esportivos) em uma experiência digital moderna, sem filas caóticas, sem inscrições duplicadas e com total transparência e auditoria para a gestão pública municipal.
+        <strong>Notas para Afrânio Alex:</strong><br>
+        Destacar que o ParnaEventos foi desenhado para resolver as dores reais da prefeitura: as pessoas reclamando que não conseguem vagas na corrida, cadastros duplicados de quem pega vaga e não vai, e o tumulto na entrega de kits. A proposta traz tanto a estratégia quanto o protótipo funcional funcionando.
       </div>
     </section>
 
-    <!-- SLIDE 2: O Problema & Oportunidade -->
+    <!-- SLIDE 2: O Desafio Operacional nos Eventos de Parnamirim -->
     <section class="slide" data-slide="2" id="slide-2">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Contexto & Motivação</span>
-          <h2>O Desafio Operacional nos Eventos do Município</h2>
-          <p class="section-desc">Eventos populares em Parnamirim sofrem com o "efeito virada de lote" e gargalos operacionais no atendimento presencial.</p>
+          <span class="section-tag">Contexto Municipal</span>
+          <h2>O Desafio Operacional nos Eventos da Cidade</h2>
+          <p class="section-desc">Eventos populares em Parnamirim (Corridas, Festivais Culturais, Torneios no Litoral) enfrentam 3 grandes problemas na prática.</p>
         </div>
 
         <div class="grid-3-col">
           <div class="feature-card danger-accent">
-            <div class="card-icon danger">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            </div>
-            <h3>Picos de Concorrência e Vagas Fantasmas</h3>
-            <p>Milhares de cidadãos acessando simultaneamente. Sistemas frágeis sofrem race conditions (duas pessoas pegando a mesma vaga) ou quedas de servidor na abertura das inscrições.</p>
+            <div class="card-icon danger">⚠️</div>
+            <h3>Picos de Acesso & Vagas Fantasmas</h3>
+            <p>Milhares de pessoas acessando ao mesmo tempo na abertura das inscrições. Sistemas comuns caem ou geram <em>overbooking</em> (mais inscritos do que kits disponíveis).</p>
             <ul class="clean-bullet-list">
-              <li>Inscrições além da capacidade real</li>
-              <li>Reclamações públicas e desgaste de imagem</li>
-              <li>Falta de critérios de desempate justos</li>
+              <li>Frustração e queixas na ouvidoria</li>
+              <li>Falta de critérios transparentes de desempate</li>
+              <li>Vagas presas por desistentes sem liberação</li>
             </ul>
           </div>
 
           <div class="feature-card warning-accent">
-            <div class="card-icon warning">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            </div>
-            <h3>Fraudes & Inscrições Duplicadas</h3>
-            <p>Participantes se inscrevendo múltiplas vezes ou ocupando vagas em dois eventos conflitantes no mesmo dia, privando outros munícipes do acesso aos eventos.</p>
+            <div class="card-icon warning">🚫</div>
+            <h3>Inscrições Duplicadas & Conflito de Data</h3>
+            <p>A mesma pessoa se inscreve múltiplas vezes ou ocupa vaga em dois eventos que acontecem no mesmo dia, tirando a oportunidade de outros munícipes participarem.</p>
             <ul class="clean-bullet-list">
-              <li>Mesma pessoa em múltiplos eventos no mesmo dia</li>
-              <li>Falta de validação para endereço em Parnamirim</li>
-              <li>Dificuldade no cadastro de dependentes menores</li>
+              <li>Pessoa inscrita em 2 eventos na mesma data</li>
+              <li>Inscrições de fora do município sem controle</li>
+              <li>Dificuldade de cadastrar filhos menores</li>
             </ul>
           </div>
 
           <div class="feature-card success-accent">
-            <div class="card-icon success">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            </div>
-            <h3>Gargalo na Entrega de Kits & Balcão</h3>
-            <p>Confusão na conferência presencial de documentos, cupons reutilizados indevidamente e falta de comprovação de quem entregou qual kit e quando.</p>
+            <div class="card-icon success">📦</div>
+            <h3>Tumulto no Balcão de Entrega de Kits</h3>
+            <p>Filas intermináveis para conferência manual, risco de um mesmo cupom ser reutilizado por terceiros e falta de comprovação de quem entregou o kit.</p>
             <ul class="clean-bullet-list">
-              <li>Uso duplicado de cupom de kit</li>
-              <li>Ausência de rastreabilidade do operador</li>
-              <li>Inscrição feita sem validação dos requisitos</li>
+              <li>Cupom impresso reaproveitado indevidamente</li>
+              <li>Falta de conferência de autorização de menores</li>
+              <li>Sem registro de quem validou cada participante</li>
             </ul>
           </div>
         </div>
@@ -172,13 +171,13 @@
         <div class="callout-banner">
           <div class="callout-icon">💡</div>
           <div class="callout-text">
-            <strong>Premissa Estratégica para o GCTI:</strong> Não se trata apenas de criar um "formulário web", mas de construir uma <em>plataforma transacional de alta confiabilidade</em>, com regras duras no banco de dados e auditoria governamental transparente.
+            <strong>O que o GCTI entrega:</strong> Um sistema digital cidadão, seguro e descomplicado, que cuida da fila sozinho e dá ao operador um app veloz de bipagem de tickets.
           </div>
         </div>
       </div>
       <div class="speaker-notes" data-for="2">
         <strong>Notas de Fala:</strong><br>
-        Enfatizar para o Afrânio que sistemas de prefeitura não podem falhar na abertura de vagas populares. A credibilidade do GCTI e da gestão municipal depende de um sistema justo, onde ninguém fure a fila e onde a capacidade seja respeitada ao milissegundo.
+        Mostrar a Afrânio que o projeto não é um formulário simples do Google Forms, mas sim uma ferramenta de gestão pública com respeito ao munícipe e proteção contra fraudes.
       </div>
     </section>
 
@@ -186,706 +185,553 @@
     <section class="slide" data-slide="3" id="slide-3">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Definições Fundamentais</span>
-          <h2>As 3 Decisões de Negócio Consolidadas</h2>
-          <p class="section-desc">Regras macro alinhadas que determinam a integridade matemática da capacidade e dos fluxos do sistema.</p>
+          <span class="section-tag">Decisões de Gestão</span>
+          <h2>3 Regras Decididas que Tornam o Sistema Justo</h2>
+          <p class="section-desc">Diretrizes que foram definidas e que garantem a integridade matemática da capacidade dos eventos.</p>
         </div>
 
         <div class="grid-3-col decisions-grid">
           <div class="decision-box active-glow">
             <div class="decision-number">01</div>
-            <div class="decision-badge">Controle de Capacidade</div>
-            <h3>Capacidade por Participante Individual</h3>
+            <div class="decision-badge">Capacidade Real</div>
+            <h3>Vaga por Participante Individual</h3>
             <p class="decision-statement">
-              <strong>Titular e cada dependente menor consomem 1 vaga cada um.</strong>
+              <strong>Titular e cada dependente menor ocupam 1 vaga cada.</strong>
             </p>
             <div class="decision-impact">
-              <span class="impact-title">Impacto Técnico & Negócio:</span>
-              <p>Uma inscrição familiar com 1 responsável e 2 filhos reserva exatamente <strong>3 vagas</strong> no evento. Cada indivíduo possui seu registro, suas checagens de elegibilidade e seu próprio ticket.</p>
+              <span class="impact-title">Como funciona na prática:</span>
+              <p>Se um pai se inscreve com 2 filhos menores, o sistema reserva exatamente <strong>3 vagas</strong> e gera <strong>3 tickets individuais</strong> com QR Code próprio para cada um retirar seu kit.</p>
             </div>
             <div class="decision-footer">
-              <span class="badge-pill">Sem vagas ocultas</span>
+              <span class="badge-pill">Sem surpresas no estoque de kits</span>
             </div>
           </div>
 
           <div class="decision-box active-glow">
             <div class="decision-number">02</div>
-            <div class="decision-badge">Gestão da Fila</div>
-            <h3>Lista de Espera com Convocação Automática</h3>
+            <div class="decision-badge">Fila Inteligente</div>
+            <h3>Lista de Espera 100% Automática</h3>
             <p class="decision-statement">
-              <strong>Vagas liberadas por cancelamento promovem o próximo elegível instantaneamente.</strong>
+              <strong>Cancelamento convoca o próximo da fila no mesmo instante.</strong>
             </p>
             <div class="decision-impact">
-              <span class="impact-title">Impacto Técnico & Negócio:</span>
-              <p>Durante o período de inscrições abertas, se um participante cancelar (mediante senha), o sistema convoca automaticamente o 1º da fila, gerando seu ticket e enviando notificação, sem intervenção manual.</p>
+              <span class="impact-title">Como funciona na prática:</span>
+              <p>Se alguém desistir e cancelar pelo portal (exigindo sua senha), o sistema convoca o primeiro munícipe da lista de espera sem que nenhum funcionário precise intervir manualmente.</p>
             </div>
             <div class="decision-footer">
-              <span class="badge-pill">Fila justa FIFO</span>
+              <span class="badge-pill">Fila transparente por ordem de chegada</span>
             </div>
           </div>
 
           <div class="decision-box active-glow">
             <div class="decision-number">03</div>
-            <div class="decision-badge">Fechamento do Ciclo</div>
-            <h3>Encerramento Automático de Não Validadas</h3>
+            <div class="decision-badge">Fechamento Pontual</div>
+            <h3>Encerramento Automático das Pendentes</h3>
             <p class="decision-statement">
-              <strong>Inscrições pendentes ao fim do prazo são fechadas sem validação posterior.</strong>
+              <strong>Prazo finalizou? Inscrições não validadas são encerradas.</strong>
             </p>
             <div class="decision-impact">
-              <span class="impact-title">Impacto Técnico & Negócio:</span>
-              <p>Ao fechar o prazo estipulado pelo gestor, inscrições que não concluíram etapas ou ficaram retidas transitam para <code>CLOSED_UNVALIDATED</code>. Protege o cronograma de entrega de kits.</p>
+              <span class="impact-title">Como funciona na prática:</span>
+              <p>Ao fechar o período estipulado pelo gestor no regulamento, inscrições que não concluíram as etapas não podem mais ser validadas. Isso dá segurança ao cronograma do evento.</p>
             </div>
             <div class="decision-footer">
-              <span class="badge-pill">Segurança jurídica</span>
+              <span class="badge-pill">Respeito ao cronograma oficial</span>
             </div>
           </div>
         </div>
 
         <div class="distinction-box">
-          <div class="distinction-tag">Distinção Conceitual Obrigatória</div>
+          <div class="distinction-tag">Conceito Central da Plataforma</div>
           <div class="distinction-content">
             <div class="dist-item left">
-              <strong>Inscrição Realizada (Pendente)</strong>
-              <span>Garante a reserva da vaga na contagem de capacidade enquanto aguarda a entrega e validação dos kits.</span>
+              <strong>1. Inscrição Realizada (Pendente)</strong>
+              <span>Garante a reserva da vaga no sistema enquanto o cidadão aguarda a data da entrega do kit.</span>
             </div>
-            <div class="dist-arrow">≠</div>
+            <div class="dist-arrow">➔</div>
             <div class="dist-item right">
-              <strong>Participação Confirmada</strong>
-              <span>Ocorre exclusivamente após a leitura do ticket pelo operador, conferência de identidade, termo de menores e entrega do kit.</span>
+              <strong>2. Participação Confirmada</strong>
+              <span>Acontece no balcão presencial quando o operador bipa o ticket, confere o termo do menor e entrega o kit.</span>
             </div>
           </div>
         </div>
       </div>
       <div class="speaker-notes" data-for="3">
         <strong>Notas de Fala:</strong><br>
-        Explicar a Afrânio que essas três decisões destravaram o desenho do banco de dados relacional. Deixam o sistema previsível: capacidade é unitária por pessoa física, a fila roda sozinha de forma transparente e há um marco temporal rígido que encerra inscrições inativas.
+        Enfatizar: Inscrição não é confirmação final. A confirmação só ocorre na entrega presencial com bipagem do QR Code. Isso impede que pessoas que se inscreveram e nunca compareceram tirem a vaga de quem realmente quer ir.
       </div>
     </section>
 
-    <!-- SLIDE 4: O Fluxo Principal do Cidadão & Operador -->
+    <!-- SLIDE 4: Visão da Jornada do Cidadão (Exemplo Visual) -->
     <section class="slide" data-slide="4" id="slide-4">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Jornada Operacional</span>
-          <h2>Fluxo Completo: Da Inscrição ao Dia do Evento</h2>
-          <p class="section-desc">Processo em 7 passos projetado para máxima usabilidade do cidadão e controle rígido no balcão de atendimento.</p>
+          <span class="section-tag">Experiência do Cidadão</span>
+          <h2>A Jornada do Munícipe: Da Tela ao Dia do Evento</h2>
+          <p class="section-desc">Processo intuitivo em 5 passos que funciona perfeitamente no celular ou computador.</p>
         </div>
 
-        <div class="flow-steps-horizontal">
-          <div class="flow-step">
-            <div class="step-num">1</div>
-            <div class="step-card">
-              <div class="step-icon">🌐</div>
-              <h4>Landing Page</h4>
-              <p>Cidadão visualiza eventos disponíveis, regulamentos, faixas etárias e cronograma municipal.</p>
+        <div class="citizen-journey-visual">
+          <div class="journey-card">
+            <div class="jc-step">1</div>
+            <div class="jc-preview-box">
+              <div class="mock-browser-header">
+                <span class="mock-dot"></span><span class="mock-dot"></span>
+                <span>parnaeventos.parnamirim.rn.gov.br</span>
+              </div>
+              <div class="mock-ui-content">
+                <div class="mock-event-mini">
+                  <strong>15ª Corrida da Emancipação</strong>
+                  <span class="badge-tag-open">Inscrições Abertas</span>
+                </div>
+              </div>
             </div>
+            <h4>1. Acesso ao Portal</h4>
+            <p>Cidadão visualiza os eventos abertos, data, local e regulamento municipal.</p>
           </div>
 
-          <div class="flow-step">
-            <div class="step-num">2</div>
-            <div class="step-card">
-              <div class="step-icon">🎯</div>
-              <h4>Seleção do Evento</h4>
-              <p>Verificação de status (Aberto/Encerrado), capacidade de vagas em tempo real e modalidades.</p>
+          <div class="journey-card">
+            <div class="jc-step">2</div>
+            <div class="jc-preview-box">
+              <div class="mock-browser-header">
+                <span class="mock-dot"></span><span>Cadastro do Munícipe</span>
+              </div>
+              <div class="mock-ui-content">
+                <div class="mock-form-line">Bairro: <strong>Cohabinal</strong></div>
+                <div class="mock-form-line">+ 1 Dependente Menor</div>
+              </div>
             </div>
+            <h4>2. Dados & Dependentes</h4>
+            <p>Informa seus dados, endereço em Parnamirim e adiciona filhos menores se houver.</p>
           </div>
 
-          <div class="flow-step">
-            <div class="step-num">3</div>
-            <div class="step-card">
-              <div class="step-icon">🔐</div>
-              <h4>Login / Cadastro</h4>
-              <p>Identificação do responsável legal. Endereço restrito a munícipes de Parnamirim/RN.</p>
+          <div class="journey-card highlight-glow">
+            <div class="jc-step">3</div>
+            <div class="jc-preview-box">
+              <div class="mock-browser-header">
+                <span class="mock-dot"></span><span>Trava Inteligente</span>
+              </div>
+              <div class="mock-ui-content">
+                <div class="mock-alert-mini">
+                  ✓ Sem conflito de data<br>
+                  ✓ Vaga reservada na hora
+                </div>
+              </div>
             </div>
+            <h4>3. Verificação Automática</h4>
+            <p>O sistema barra inscrições repetidas ou em 2 eventos no mesmo dia.</p>
           </div>
 
-          <div class="flow-step">
-            <div class="step-num">4</div>
-            <div class="step-card highlight-step">
-              <div class="step-icon">⚡</div>
-              <h4>Validação Severa</h4>
-              <p>Bloqueio de duplicidade e <strong>conflito de data</strong> (proibido 2 eventos no mesmo dia).</p>
+          <div class="journey-card">
+            <div class="jc-step">4</div>
+            <div class="jc-preview-box">
+              <div class="mock-browser-header">
+                <span class="mock-dot"></span><span>Ticket Oficial</span>
+              </div>
+              <div class="mock-ui-content center">
+                <div class="mock-ticket-code">QR CODE #88421</div>
+                <small>Salvo no WhatsApp / PDF</small>
+              </div>
             </div>
+            <h4>4. Emissão do Ticket</h4>
+            <p>Recebe seu ticket com QR Code individual no celular ou impresso.</p>
           </div>
 
-          <div class="flow-step">
-            <div class="step-num">5</div>
-            <div class="step-card">
-              <div class="step-icon">🎫</div>
-              <h4>Geração de Tickets</h4>
-              <p>Ticket individual criptografado gerado para o titular e cada dependente menor inscrito.</p>
+          <div class="journey-card success-glow">
+            <div class="jc-step">5</div>
+            <div class="jc-preview-box">
+              <div class="mock-browser-header">
+                <span class="mock-dot"></span><span>Balcão de Kits</span>
+              </div>
+              <div class="mock-ui-content center">
+                <span class="mock-scan-ok">Bipado: CONFIRMADO!</span>
+              </div>
             </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="step-num">6</div>
-            <div class="step-card highlight-step">
-              <div class="step-icon">📦</div>
-              <h4>Entrega de Kits</h4>
-              <p>Operador GCTI escaneia o ticket, confere termo de menor e valida documentos no balcão.</p>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="step-num">7</div>
-            <div class="step-card success-step">
-              <div class="step-icon">🏁</div>
-              <h4>Confirmado!</h4>
-              <p>Status atualizado para <code>CONFIRMED</code>. Cidadão pronto e credenciado para o evento.</p>
-            </div>
+            <h4>5. Retirada & Evento</h4>
+            <p>Operador escaneia em 2 segundos, confere o termo e entrega o kit.</p>
           </div>
         </div>
 
-        <div class="flow-matrix-summary">
-          <div class="fms-card">
-            <span class="fms-title">Experiência do Munícipe</span>
-            <p>Interface intuitiva, sem formulários desnecessários, acompanhamento em tempo real e ticket acessível pelo celular ou impresso.</p>
-          </div>
-          <div class="fms-card">
-            <span class="fms-title">Poder do Operador no Balcão</span>
-            <p>Leitura veloz via QR Code no celular ou pistola barcode, validação em menos de 3 segundos e impedimento de fraude de tickets reutilizados.</p>
-          </div>
-          <div class="fms-card">
-            <span class="fms-title">Controle do Gestor GCTI</span>
-            <p>Dashboard de ocupação, taxa de comparecimento na entrega de kits, auditoria de operadores e reversão justificada quando necessária.</p>
-          </div>
+        <div class="slide-footer-cta">
+          <button class="btn-primary-sm-glow" onclick="presentation.switchToPrototype('citizen')">
+            Testar Formulário de Inscrição no Protótipo &rarr;
+          </button>
         </div>
       </div>
       <div class="speaker-notes" data-for="4">
         <strong>Notas de Fala:</strong><br>
-        Destacar a facilidade: o munícipe inscreve sua família em poucos cliques, mas nos bastidores o motor de regras confere conflito de data, idade dos menores e gera um ticket com hash único. No balcão, o operador só precisa de um smartphone ou leitor para validar.
+        Mostrar a simplicidade para o cidadão de Parnamirim: não tem burocracia excessiva, mas há verificação firme de residência e conflito de datas. O munícipe sai com o comprovante no celular na hora.
       </div>
     </section>
 
-    <!-- SLIDE 5: Regras de Negócio Consolidadas & Casos Especiais -->
+    <!-- SLIDE 5: As Regras de Negócio na Prática (Sem Jargões) -->
     <section class="slide" data-slide="5" id="slide-5">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Regras do Domínio</span>
-          <h2>Regras de Negócio e Tratamento de Exceções</h2>
-          <p class="section-desc">Como o ParnaEventos responde aos cenários reais do cotidiano da administração pública.</p>
+          <span class="section-tag">Segurança Operacional</span>
+          <h2>Como o Sistema Resolve Casos Reais do Dia a Dia</h2>
+          <p class="section-desc">Respostas práticas para cada situação que acontece durante a realização dos eventos.</p>
         </div>
 
         <div class="grid-2-col rules-grid">
           <div class="rule-item-card">
             <div class="rule-badge-group">
-              <span class="rule-badge rule-critical">Crítico</span>
-              <span class="rule-name">Conflito de Data no Mesmo Dia</span>
+              <span class="rule-badge rule-critical">Regra 1</span>
+              <span class="rule-name">Dois eventos no mesmo dia?</span>
             </div>
-            <h4>Bloqueio Rígido Multi-Evento</h4>
-            <p>O cidadão <strong>não pode se inscrever em dois eventos diferentes na mesma data</strong>, mesmo que os horários aparentem não colidir. Isso democratiza as vagas e impede a retenção ociosa de recursos públicos.</p>
-            <div class="rule-tech-pill">Validação transacional atômica no banco</div>
+            <h4>Bloqueio Imediato de Conflito de Data</h4>
+            <p>Se o munícipe já está inscrito na Corrida da Emancipação no domingo, e tentar se inscrever no Festival Gastronômico no mesmo domingo, o sistema recusa: <em>"Você já possui inscrição em 25/11. É permitida 1 inscrição por dia para democratizar o acesso."</em></p>
           </div>
 
           <div class="rule-item-card">
             <div class="rule-badge-group">
-              <span class="rule-badge rule-security">Segurança</span>
-              <span class="rule-name">Cancelamento Seguro de Inscrição</span>
+              <span class="rule-badge rule-security">Regra 2</span>
+              <span class="rule-name">Desistência e Cancelamento?</span>
             </div>
-            <h4>Exigência de Senha & Reabertura de Vagas</h4>
-            <p>Para evitar cancelamentos acidentais ou maliciosos, o participante <strong>deve digitar sua senha</strong>. Se as inscrições estiverem abertas, a vaga é imediatamente liberada para a lista de espera. Se já encerradas, apenas cancela.</p>
-            <div class="rule-tech-pill">Proteção contra ataques de terceiros</div>
+            <h4>Cancelamento Seguro com Senha</h4>
+            <p>Para evitar que terceiros cancelem a vaga de alguém de brincadeira, o munícipe <strong>digita sua senha</strong>. Se as inscrições estiverem abertas, a vaga é transferida na hora para a lista de espera. Se encerradas, apenas cancela.</p>
           </div>
 
           <div class="rule-item-card">
             <div class="rule-badge-group">
-              <span class="rule-badge rule-legal">Jurídico / Estatuto</span>
-              <span class="rule-name">Inscrição de Menores de Idade</span>
+              <span class="rule-badge rule-legal">Regra 3</span>
+              <span class="rule-name">Filhos e Menores de Idade?</span>
             </div>
-            <h4>Responsabilidade Legal & Termos Assinados</h4>
-            <p>A idade mínima é definida no regulamento de cada evento. Menores devem estar vinculados a um responsável cadastrado, exigindo presença dos pais/responsáveis e assinatura de termo na entrega do kit.</p>
-            <div class="rule-tech-pill">Vínculo formal <code>participant_guardians</code></div>
+            <h4>Vínculo de Responsável & Termo de Autorização</h4>
+            <p>O gestor estipula a idade mínima no regulamento. O responsável cadastra o filho na mesma conta e assina o termo de autorização na entrega presencial do kit.</p>
           </div>
 
           <div class="rule-item-card">
             <div class="rule-badge-group">
-              <span class="rule-badge rule-audit">Auditoria</span>
-              <span class="rule-name">Tentativa de Reutilização de Ticket</span>
+              <span class="rule-badge rule-audit">Regra 4</span>
+              <span class="rule-name">Tentativa de usar cupom duas vezes?</span>
             </div>
-            <h4>Bloqueio e Rastreio de Fraude</h4>
-            <p>Um ticket já utilizado <strong>nunca pode ser revalidado</strong>. Qualquer segunda tentativa é sumariamente rejeitada, disparando alerta com o horário, operador e local da primeira validação.</p>
-            <div class="rule-tech-pill">Estado de ticket <code>USED</code> imutável</div>
+            <h4>Alerta Vermelho de Cupom Já Utilizado</h4>
+            <p>Cada ticket tem hash único. Quando o operador bipa, ele marca como <code>UTILIZADO</code>. Se alguém tentar apresentar o mesmo bilhete impresso de novo, a tela do operador acusa a fraude imediatamente.</p>
           </div>
 
           <div class="rule-item-card">
             <div class="rule-badge-group">
-              <span class="rule-badge rule-gov">Governança</span>
-              <span class="rule-name">Reversão de Validação por Gestor</span>
+              <span class="rule-badge rule-gov">Regra 5</span>
+              <span class="rule-name">Gestor precisa reverter uma validação?</span>
             </div>
-            <h4>Ação Administrativa com Justificativa</h4>
-            <p>Apenas perfis com permissão de Gestor (ex: equipe do Afrânio) podem revogar uma validação concedida, sendo <strong>obrigatório preencher a justificativa formal</strong> que fica gravada em log de auditoria permanente.</p>
-            <div class="rule-tech-pill">Append-only audit log sem deleção física</div>
+            <h4>Poder do Gestor com Justificativa Obrigatória</h4>
+            <p>Se constatada irregularidade (ex: fraude na documentação), o Gestor Afrânio ou equipe autorizada pode revogar o ticket, preenchendo obrigatoriamente o motivo que fica gravado para sempre no histórico.</p>
           </div>
 
           <div class="rule-item-card">
             <div class="rule-badge-group">
-              <span class="rule-badge rule-notify">Comunicação</span>
-              <span class="rule-name">Alteração de Capacidade ou Cancelamento</span>
+              <span class="rule-badge rule-notify">Regra 6</span>
+              <span class="rule-name">Alteração no evento ou clima adverso?</span>
             </div>
-            <h4>Notificação Automática e Transparência</h4>
-            <p>Se o gestor alterar a capacidade ou cancelar o evento por força maior (ex: clima), o sistema notifica os afetados por e-mail/notificação com a justificativa oficial cadastrada.</p>
-            <div class="rule-tech-pill">Mensageria assíncrona com Outbox Pattern</div>
+            <h4>Comunicação Direta com os Inscritos</h4>
+            <p>Se a capacidade mudar ou o evento for adiado por chuva forte, o gestor emite um comunicado oficial pelo painel e o sistema notifica todos os participantes afetados automaticamente.</p>
           </div>
         </div>
       </div>
       <div class="speaker-notes" data-for="5">
         <strong>Notas de Fala:</strong><br>
-        Mostrar como as respostas dadas pelo gestor foram transformadas em blindagens técnicas: cancelamento exige senha, menor só com responsável, ticket usado uma vez nunca mais passa e o gestor tem superpoder de reversão com auditoria impecável.
+        Estas são exatamente as respostas que Afrânio procura: nada de buracos no regulamento. O sistema dá autonomia ao munícipe mas protege o patrimônio e a organização da prefeitura.
       </div>
     </section>
 
-    <!-- SLIDE 6: A Máquina de Estados da Inscrição (FSM) -->
+    <!-- SLIDE 6: Ciclo de Vida Visual da Inscrição -->
     <section class="slide" data-slide="6" id="slide-6">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Engenharia de Software</span>
-          <h2>Máquina de Estados Finita (FSM) da Inscrição</h2>
-          <p class="section-desc">Ciclo de vida determinístico: nenhuma inscrição muda de status sem seguir uma transição autorizada.</p>
+          <span class="section-tag">Fluxo Transparente</span>
+          <h2>Os Estados da Inscrição na Visão do Gestor</h2>
+          <p class="section-desc">O participante nunca fica no escuro: a situação de cada vaga é clara e rastreável a cada minuto.</p>
         </div>
 
-        <div class="fsm-visual-container">
-          <!-- State Nodes Grid -->
-          <div class="state-node-board">
-            <div class="state-pill state-pending">
-              <div class="state-dot"></div>
-              <div class="state-info">
-                <strong>PENDING_VALIDATION</strong>
-                <span>Inscrito, vaga reservada, aguardando kit</span>
-              </div>
-            </div>
-
-            <div class="state-arrow-wrap">
-              <span class="arrow-label">Validação Presencial</span>
-              <span class="arrow-symbol">➔</span>
-            </div>
-
-            <div class="state-pill state-confirmed">
-              <div class="state-dot"></div>
-              <div class="state-info">
-                <strong>CONFIRMED</strong>
-                <span>Ticket lido, kit entregue, apto para o evento</span>
-              </div>
-            </div>
-
-            <div class="state-arrow-wrap">
-              <span class="arrow-label">Reversão c/ Motivo</span>
-              <span class="arrow-symbol">➔</span>
-            </div>
-
-            <div class="state-pill state-revoked">
-              <div class="state-dot"></div>
-              <div class="state-info">
-                <strong>REVOKED</strong>
-                <span>Revogado pelo Gestor GCTI</span>
-              </div>
-            </div>
+        <div class="status-lifecycle-grid">
+          <div class="status-card-visual st-pending">
+            <div class="status-pill-badge yellow">Aguardando Kit</div>
+            <h3>Pendente de Validação</h3>
+            <p>O cidadão fez a inscrição pela internet. A vaga está garantida no estoque, mas o kit ainda não foi retirado.</p>
+            <div class="status-action-tag">Ação: Ir ao balcão presencial com documento</div>
           </div>
 
-          <!-- Secondary Branches -->
-          <div class="state-branches-row">
-            <div class="branch-card branch-waitlist">
-              <div class="branch-header">
-                <span class="branch-badge">Lista de Espera</span>
-                <strong>WAITLISTED</strong>
-              </div>
-              <p>Sem vaga inicial. Se surgir vaga durante inscrições abertas ➔ <code>PENDING_VALIDATION</code> automaticamente.</p>
-            </div>
-
-            <div class="branch-card branch-cancelled">
-              <div class="branch-header">
-                <span class="branch-badge">Cancelamento</span>
-                <strong>CANCELLED</strong>
-              </div>
-              <p>Ação pelo próprio participante mediante senha. Libera vaga se inscrições ainda estiverem abertas.</p>
-            </div>
-
-            <div class="branch-card branch-closed">
-              <div class="branch-header">
-                <span class="branch-badge">Expirado</span>
-                <strong>CLOSED_UNVALIDATED</strong>
-              </div>
-              <p>Prazo encerrou e participante não validou presencialmente. Bloqueio automático de confirmação.</p>
-            </div>
+          <div class="status-card-visual st-confirmed">
+            <div class="status-pill-badge green">Apto p/ o Evento</div>
+            <h3>Participação Confirmada</h3>
+            <p>O operador bipou o ticket, conferiu a documentação e entregou o kit. O munícipe está 100% credenciado.</p>
+            <div class="status-action-tag">Ação: Comparecer na data do evento</div>
           </div>
-        </div>
 
-        <!-- Invariants Table -->
-        <div class="invariants-table-wrap">
-          <div class="table-title">Invariantes do Sistema (Regras Matemáticas que NUNCA Podem Ser Violadas)</div>
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Invariante</th>
-                <th>Regra Rígida do Domínio</th>
-                <th>Mecanismo de Proteção</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Teto de Vagas</strong></td>
-                <td><code>Vagas Ocupadas (Pending + Confirmed) ≤ Capacidade Total</code></td>
-                <td>Bloqueio pessimista <code>SELECT FOR UPDATE</code> na capacidade</td>
-              </tr>
-              <tr>
-                <td><strong>Unicidade no Evento</strong></td>
-                <td>Um cidadão só pode ter 1 inscrição por evento</td>
-                <td>Constraint <code>UNIQUE (event_id, participant_id)</code></td>
-              </tr>
-              <tr>
-                <td><strong>Conflito de Data</strong></td>
-                <td>Inscrição proibida se já houver evento ativo na mesma data</td>
-                <td>Verificação transacional com lock do participante</td>
-              </tr>
-              <tr>
-                <td><strong>Uso Único de Ticket</strong></td>
-                <td>Ticket só pode mudar de <code>ISSUED</code> para <code>USED</code> uma vez</td>
-                <td>Operação atômica <code>UPDATE tickets WHERE status = 'ISSUED'</code></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="status-card-visual st-waitlist">
+            <div class="status-pill-badge blue">Fila Automática</div>
+            <h3>Lista de Espera</h3>
+            <p>O evento lotou. O cidadão aguarda surgir uma desistência. Se alguém cancelar, o sistema convoca na mesma hora.</p>
+            <div class="status-action-tag">Ação: Acompanhar notificação</div>
+          </div>
+
+          <div class="status-card-visual st-cancelled">
+            <div class="status-pill-badge red">Cancelado</div>
+            <h3>Cancelado pelo Cidadão</h3>
+            <p>Desistência informada mediante senha. A vaga foi devolvida imediatamente para o próximo da fila.</p>
+            <div class="status-action-tag">Ação: Vaga repassada a outro munícipe</div>
+          </div>
+
+          <div class="status-card-visual st-closed">
+            <div class="status-pill-badge gray">Prazo Esgotado</div>
+            <h3>Encerrado Não Validado</h3>
+            <p>O prazo de entrega de kits expirou e o inscrito não compareceu. A vaga é fechada sem prorrogação.</p>
+            <div class="status-action-tag">Ação: Conforme regulamento do evento</div>
+          </div>
+
+          <div class="status-card-visual st-revoked">
+            <div class="status-pill-badge purple">Ação do Gestor</div>
+            <h3>Validação Revogada</h3>
+            <p>O Gestor GCTI cancelou a validação por motivo justificado (ex: violação de regra ou fraude documental).</p>
+            <div class="status-action-tag">Ação: Histórico gravado em auditoria</div>
+          </div>
         </div>
       </div>
       <div class="speaker-notes" data-for="6">
         <strong>Notas de Fala:</strong><br>
-        Explicar a FSM (Finite State Machine). A regra mais importante para o gestor entender é que o banco não permite pular etapas: ninguém vira CONFIRMED sem passar pelo balcão, e ninguém que expirou (CLOSED_UNVALIDATED) pode ser reaberto sem auditoria.
+        Mostrar como esses 6 estados organizam a vida da secretaria: relatórios mostram exatamente quantos estão pendentes, quantos já retiraram o kit e quem faltou, evitando desperdício de material público.
       </div>
     </section>
 
-    <!-- SLIDE 7: Arquitetura Técnica — Monólito Modular & SOLID -->
+    <!-- SLIDE 7: O Painel do Gestor (Simulação Visual Afrânio Alex) -->
     <section class="slide" data-slide="7" id="slide-7">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Engenharia de Solução</span>
-          <h2>Arquitetura Recomendada: Monólito Modular & SOLID</h2>
-          <p class="section-desc">Por que a simplicidade bem estruturada supera os microsserviços no estágio atual do projeto.</p>
+          <span class="section-tag">Controle Gerencial</span>
+          <h2>O que o Gestor Afrânio Alex Controla no Painel</h2>
+          <p class="section-desc">Uma central completa para criar eventos, acompanhar bairros participantes e gerenciar vagas em tempo real.</p>
         </div>
 
-        <div class="arch-split-layout">
-          <div class="arch-modules-grid">
-            <div class="module-card">
-              <div class="mod-icon">👤</div>
-              <h4>Identidade & Acesso</h4>
-              <p>Contas, autenticação segura, perfis de munícipe, operadores e gestores GCTI.</p>
+        <div class="manager-preview-layout">
+          <div class="manager-mock-screen">
+            <div class="mms-header">
+              <span>GCTI Parnamirim • Painel do Gestor de Eventos</span>
+              <span class="badge-role">Afrânio Alex (Gestor)</span>
             </div>
+            <div class="mms-body">
+              <div class="mms-stats-row">
+                <div class="mms-stat">
+                  <small>Eventos Ativos</small>
+                  <strong>4</strong>
+                </div>
+                <div class="mms-stat">
+                  <small>Vagas Totais</small>
+                  <strong>1.720</strong>
+                </div>
+                <div class="mms-stat">
+                  <small>Inscritos</small>
+                  <strong>1.480 (86%)</strong>
+                </div>
+                <div class="mms-stat">
+                  <small>Kits Entregues</small>
+                  <strong>1.120 (75%)</strong>
+                </div>
+              </div>
 
-            <div class="module-card">
-              <div class="mod-icon">👨‍👩‍👧</div>
-              <h4>Participantes & Guardiões</h4>
-              <p>Dados civis, endereço em Parnamirim, dependentes menores e termos de responsabilidade.</p>
-            </div>
-
-            <div class="module-card">
-              <div class="mod-icon">📅</div>
-              <h4>Eventos & Regulamentos</h4>
-              <p>Datas, modalidades, faixas etárias, etapas de entrega de kits e capacidade de vagas.</p>
-            </div>
-
-            <div class="module-card highlight-mod">
-              <div class="mod-icon">⚡</div>
-              <h4>Núcleo de Inscrições & Fila</h4>
-              <p>Motor de regras, concorrência, lista de espera automática e transações atômicas.</p>
-            </div>
-
-            <div class="module-card">
-              <div class="mod-icon">🎟️</div>
-              <h4>Tickets & Validação</h4>
-              <p>Geração de hash token, QR Code seguro, leitura presencial e cancelamento de tickets.</p>
-            </div>
-
-            <div class="module-card">
-              <div class="mod-icon">🛡️</div>
-              <h4>Auditoria & Outbox</h4>
-              <p>Append-only logs de todas as ações, mensagens para disparo assíncrono de e-mails/alertas.</p>
+              <div class="mms-action-box">
+                <div class="mms-action-title">
+                  <strong>+ Criar Novo Evento Municipal</strong>
+                  <span>Define vagas, data, bairros e documentos exigidos</span>
+                </div>
+                <div class="mms-action-btn-fake">Publicar na Landing Page</div>
+              </div>
             </div>
           </div>
 
-          <div class="arch-benefits-card">
-            <h3>Por Que Esta Arquitetura é Ideal para o GCTI?</h3>
-            <ul class="benefit-list">
-              <li>
-                <div class="b-icon">🎯</div>
-                <div>
-                  <strong>Consistência ACID Nativa:</strong>
-                  <span>Sem inconsistências entre bancos diferentes. A reserva da vaga e a geração do ticket acontecem na mesma transação.</span>
-                </div>
-              </li>
-              <li>
-                <div class="b-icon">💰</div>
-                <div>
-                  <strong>Menor Custo e Complexidade de Infra:</strong>
-                  <span>Não exige Kubernetes complexo ou dezenas de microsserviços. Roda de forma econômica em infraestrutura da prefeitura ou cloud.</span>
-                </div>
-              </li>
-              <li>
-                <div class="b-icon">🚀</div>
-                <div>
-                  <strong>Fácil Evolução (SOLID):</strong>
-                  <span>Módulos desacoplados por interfaces. Se no futuro o módulo de Tickets precisar virar um serviço separado, a extração é natural.</span>
-                </div>
-              </li>
-              <li>
-                <div class="b-icon">🔒</div>
-                <div>
-                  <strong>Conformidade com LGPD:</strong>
-                  <span>Isolamento e controle de acesso rígido aos dados dos cidadãos e seus filhos menores.</span>
-                </div>
-              </li>
-            </ul>
+          <div class="manager-features-list">
+            <div class="mf-item">
+              <div class="mf-icon">📊</div>
+              <div>
+                <strong>Métricas por Bairro de Parnamirim</strong>
+                <p>Veja a adesão de munícipes em Nova Parnamirim, Cohabinal, Santos Reis, Monte Castelo, Pirangi e demais regiões.</p>
+              </div>
+            </div>
+
+            <div class="mf-item">
+              <div class="mf-icon">⚡</div>
+              <div>
+                <strong>Flexibilidade de Capacidade</strong>
+                <p>Recebeu mais 100 kits da organização? Amplie as vagas com 1 clique. O sistema chama 100 munícipes da fila automaticamente!</p>
+              </div>
+            </div>
+
+            <div class="mf-item">
+              <div class="mf-icon">🛡️</div>
+              <div>
+                <strong>Auditoria Completa (Logs)</strong>
+                <p>Saiba quem validou cada participante, o horário exato e o balcão. Zero margem para dúvidas ou acusações de favorecimento.</p>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div class="slide-footer-cta">
+          <button class="btn-primary-sm-glow" onclick="presentation.switchToPrototype('manager')">
+            Abrir Painel do Gestor no Protótipo &rarr;
+          </button>
         </div>
       </div>
       <div class="speaker-notes" data-for="7">
         <strong>Notas de Fala:</strong><br>
-        Mostrar visão estratégica para Afrânio: muitos projetos públicos falham tentando criar microsserviços desde o dia 1. O Monólito Modular oferece velocidade de entrega, banco único com integridade atômica absoluta e facilidade de manutenção para a equipe do GCTI.
+        O gestor Afrânio tem o controle total: cria o evento em 1 minuto, acompanha gráficos de retirada de kits pelo celular e pode aumentar ou reduzir vagas de forma transparente.
       </div>
     </section>
 
-    <!-- SLIDE 8: As 3 Transações Críticas no Banco de Dados -->
+    <!-- SLIDE 8: O Balcão do Operador (Agilidade na Entrega) -->
     <section class="slide" data-slide="8" id="slide-8">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Segurança Concorrente</span>
-          <h2>O Coração Técnico: 3 Transações Críticas (ACID)</h2>
-          <p class="section-desc">Garantia matemática de que requisições simultâneas nunca corromperão vagas ou ingressos.</p>
+          <span class="section-tag">Operação no Dia do Evento</span>
+          <h2>O Balcão do Operador: Entrega Ágil & Sem Filas</h2>
+          <p class="section-desc">Uma tela feita para celular ou tablet onde o funcionário bipa o ticket e libera o kit em menos de 3 segundos.</p>
         </div>
 
-        <div class="transactions-container">
-          <!-- Transação A -->
-          <div class="tx-card">
-            <div class="tx-badge">Transação A</div>
-            <h3>Inscrição com Bloqueio Concorrente</h3>
-            <p class="tx-desc">Quando 500 pessoas disputam a última vaga disponível:</p>
-            <div class="tx-pipeline">
-              <div class="pipe-step">1. Inicia Transação DB</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step highlight">2. Lock Pessimista no Participante</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step">3. Checa Conflito de Data no Mesmo Dia</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step highlight">4. SELECT FOR UPDATE no Contador de Vagas</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-branch">
-                <span class="pipe-sub yes">Vaga Livre? → Cria Inscrição + Ticket</span>
-                <span class="pipe-sub no">Lotado? → Cria Entrada na Lista de Espera</span>
+        <div class="operator-preview-layout">
+          <div class="operator-mobile-mock">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="ps-header">
+                  <span>Balcão 01 • Entrega de Kits</span>
+                  <small>Operador: João Silva</small>
+                </div>
+                <div class="ps-scanner-box">
+                  <div class="scanner-aim"></div>
+                  <span>Aponte para o QR Code</span>
+                </div>
+                <div class="ps-participant-card">
+                  <strong>Maria Clara Santos</strong>
+                  <span>CPF: 045.***.***-89 • Cohabinal</span>
+                  <div class="ps-badges">
+                    <span class="badge-mini green">✓ Doc Conferido</span>
+                    <span class="badge-mini blue">+1 Filho Menor</span>
+                  </div>
+                </div>
+                <button class="btn-ps-confirm">Validar & Entregar Kit</button>
               </div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step success">5. Grava Auditoria e Commit Atômico</div>
             </div>
           </div>
 
-          <!-- Transação B -->
-          <div class="tx-card">
-            <div class="tx-badge">Transação B</div>
-            <h3>Cancelamento & Convocação Instantânea</h3>
-            <p class="tx-desc">Ao cancelar, a fila anda sem delay e sem intervenção humana:</p>
-            <div class="tx-pipeline">
-              <div class="pipe-step">1. Valida Senha do Usuário</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step">2. Marca Inscrição como <code>CANCELLED</code></div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step highlight">3. Inscrições Ainda Abertas?</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-branch">
-                <span class="pipe-sub yes">Sim: Busca 1º da Waitlist (FIFO)</span>
-                <span class="pipe-sub no">Não: Não Reabre Vaga (Regra de Negócio)</span>
-              </div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step highlight">4. Promove para PENDING e Emite Ticket</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step success">5. Agenda Notificação e E-mail no Outbox</div>
+          <div class="operator-benefits">
+            <div class="ob-card">
+              <h4>🎯 Bipagem com Smartphone</h4>
+              <p>Não precisa de equipamentos caros de leitor barcode. Qualquer celular com câmera da equipe do GCTI faz a leitura do QR Code.</p>
             </div>
-          </div>
 
-          <!-- Transação C -->
-          <div class="tx-card">
-            <div class="tx-badge">Transação C</div>
-            <h3>Validação de Kit no Balcão (Operador)</h3>
-            <p class="tx-desc">Prevenção contra tentativa de leitura dupla do mesmo cupom:</p>
-            <div class="tx-pipeline">
-              <div class="pipe-step">1. Leitura do QR Code / Token Hash</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step highlight">2. Lock Exclusivo no Ticket</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step">3. Checa: <code>status == 'ISSUED'</code>?</div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-branch">
-                <span class="pipe-sub yes">Sim: Atualiza para <code>USED</code></span>
-                <span class="pipe-sub no">Não: Rejeita ("Já Utilizado às HH:MM")</span>
-              </div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step success">4. Inscrição vira <code>CONFIRMED</code></div>
-              <div class="pipe-arrow">↓</div>
-              <div class="pipe-step">5. Registra Operador e Commit</div>
+            <div class="ob-card">
+              <h4>👶 Alerta Especial de Dependentes Menores</h4>
+              <p>Quando a inscrição tiver menores de idade, a tela do operador avisa na hora: <em>"Atenção: Conferir documento do responsável e recolher assinatura no termo do menor."</em></p>
+            </div>
+
+            <div class="ob-card danger">
+              <h4>🚨 Blindagem Anti-Reutilização de Cupons</h4>
+              <p>Se a pessoa imprimir 2 cópias do ticket e der para o amigo, ao bipar a segunda vez o app toca alarme sonoro e mostra que o kit já foi entregue.</p>
             </div>
           </div>
+        </div>
+
+        <div class="slide-footer-cta">
+          <button class="btn-primary-sm-glow" onclick="presentation.switchToPrototype('operator')">
+            Testar Leitor do Operador no Protótipo &rarr;
+          </button>
         </div>
       </div>
       <div class="speaker-notes" data-for="8">
         <strong>Notas de Fala:</strong><br>
-        Este slide é a prova do rigor de engenharia: explicamos para o Afrânio que tudo é ACID. Não existe a menor possibilidade de uma vaga ser dada a dois munícipes ou de um ticket ser validado duas vezes em balcões diferentes simultaneamente.
+        Mostrar que a operação no dia da entrega do kit é o momento onde mais acontecem confusões. O app do operador é à prova de erro humano: bipa, confere o documento, entrega o kit e o ticket morre na mesma hora.
       </div>
     </section>
 
-    <!-- SLIDE 9: Modelo de Dados Relacional (PostgreSQL) -->
+    <!-- SLIDE 9: Os Dados do Cidadão e Integridade Municipal -->
     <section class="slide" data-slide="9" id="slide-9">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Engenharia de Dados</span>
-          <h2>Modelo Relacional de Alto Desempenho</h2>
-          <p class="section-desc">Entidades normalizadas, constraints de integridade e separação estrita de responsabilidades.</p>
+          <span class="section-tag">Segurança & LGPD</span>
+          <h2>Como os Dados São Protegidos na Prefeitura</h2>
+          <p class="section-desc">Estrutura pensada para respeitar a privacidade dos munícipes e blindar as informações dos menores.</p>
         </div>
 
-        <div class="db-schema-layout">
-          <div class="tables-visual-grid">
-            <div class="db-table-card">
-              <div class="table-name">accounts</div>
-              <ul class="col-list">
-                <li class="pk"><span>id</span> <small>UUID PK</small></li>
-                <li><span>email</span> <small>VARCHAR(254) UNIQUE</small></li>
-                <li><span>password_hash</span> <small>TEXT</small></li>
-                <li><span>status</span> <small>ACTIVE | BLOCKED</small></li>
-              </ul>
-            </div>
-
-            <div class="db-table-card">
-              <div class="table-name">participants</div>
-              <ul class="col-list">
-                <li class="pk"><span>id</span> <small>UUID PK</small></li>
-                <li class="fk"><span>account_id</span> <small>UUID FK</small></li>
-                <li><span>full_name</span> <small>VARCHAR(200)</small></li>
-                <li><span>birth_date</span> <small>DATE</small></li>
-                <li><span>phone</span> <small>VARCHAR(30)</small></li>
-              </ul>
-            </div>
-
-            <div class="db-table-card">
-              <div class="table-name">participant_guardians</div>
-              <ul class="col-list">
-                <li class="pk"><span>guardian_id</span> <small>UUID PK, FK</small></li>
-                <li class="pk"><span>dependent_id</span> <small>UUID PK, FK</small></li>
-                <li><span>relationship</span> <small>VARCHAR(50)</small></li>
-                <li><span>verified_at</span> <small>TIMESTAMPTZ</small></li>
-              </ul>
-            </div>
-
-            <div class="db-table-card highlight-border">
-              <div class="table-name">events</div>
-              <ul class="col-list">
-                <li class="pk"><span>id</span> <small>UUID PK</small></li>
-                <li><span>name</span> <small>VARCHAR(200)</small></li>
-                <li><span>event_date</span> <small>DATE NOT NULL</small></li>
-                <li><span>reg_opens_at</span> <small>TIMESTAMPTZ</small></li>
-                <li><span>reg_closes_at</span> <small>TIMESTAMPTZ</small></li>
-                <li><span>capacity</span> <small>INT CHECK(>=0)</small></li>
-              </ul>
-            </div>
-
-            <div class="db-table-card highlight-border">
-              <div class="table-name">registrations</div>
-              <ul class="col-list">
-                <li class="pk"><span>id</span> <small>UUID PK</small></li>
-                <li class="fk"><span>event_id</span> <small>UUID FK</small></li>
-                <li class="fk"><span>participant_id</span> <small>UUID FK</small></li>
-                <li><span>status</span> <small>VARCHAR(30)</small></li>
-                <li class="unique"><span>UNIQUE(event_id, participant_id)</span></li>
-              </ul>
-            </div>
-
-            <div class="db-table-card">
-              <div class="table-name">tickets</div>
-              <ul class="col-list">
-                <li class="pk"><span>id</span> <small>UUID PK</small></li>
-                <li class="fk"><span>registration_id</span> <small>UUID FK UNIQUE</small></li>
-                <li><span>token_hash</span> <small>TEXT UNIQUE</small></li>
-                <li><span>status</span> <small>ISSUED | USED | REVOKED</small></li>
-                <li><span>used_at</span> <small>TIMESTAMPTZ</small></li>
-              </ul>
-            </div>
-
-            <div class="db-table-card">
-              <div class="table-name">waitlist_entries</div>
-              <ul class="col-list">
-                <li class="pk"><span>id</span> <small>UUID PK</small></li>
-                <li class="fk"><span>registration_id</span> <small>UUID FK UNIQUE</small></li>
-                <li><span>queue_position</span> <small>BIGINT NOT NULL</small></li>
-                <li><span>status</span> <small>WAITING | OFFERED</small></li>
-              </ul>
-            </div>
-
-            <div class="db-table-card">
-              <div class="table-name">audit_logs (Imutável)</div>
-              <ul class="col-list">
-                <li class="pk"><span>id</span> <small>UUID PK</small></li>
-                <li><span>actor_account_id</span> <small>UUID</small></li>
-                <li><span>action</span> <small>VARCHAR(100)</small></li>
-                <li><span>reason</span> <small>TEXT</small></li>
-                <li><span>metadata</span> <small>JSONB</small></li>
-              </ul>
-            </div>
+        <div class="grid-3-col">
+          <div class="feature-card">
+            <div class="card-icon success">🔒</div>
+            <h3>Privacidade & LGPD</h3>
+            <p>Dados de crianças e responsáveis são protegidos. O QR Code do ticket contém apenas um código criptografado, sem expor CPF ou senhas para curiosos.</p>
           </div>
 
-          <div class="db-highlights-sidebar">
-            <div class="db-highlight-item">
-              <strong>Hash Criptográfico de Ticket</strong>
-              <p>O token do ticket só é exibido na tela do munícipe. No banco gravamos apenas o <code>SHA-256 hash</code>, impedindo vazamentos ou falsificações internas.</p>
+          <div class="feature-card">
+            <div class="card-icon warning">🏠</div>
+            <h3>Foco nos Munícipes de Parnamirim</h3>
+            <p>Validação dos bairros locais (Nova Parnamirim, Cohabinal, Santos Reis, Monte Castelo, Pirangi). O recurso público beneficia prioritariamente a população da cidade.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="card-icon danger">📋</div>
+            <h3>Histórico Imutável de Auditoria</h3>
+            <p>Qualquer ação crítica (cancelamento de vaga, entrega de kit, revogação pelo gestor) é gravada de forma permanente. Ninguém consegue "apagar" registros.</p>
+          </div>
+        </div>
+
+        <div class="ticket-visual-preview-slide">
+          <div class="tvp-badge">Exemplo do Ticket Oficial Emitido pelo Sistema</div>
+          <div class="tvp-card">
+            <div class="tvp-left">
+              <div class="tvp-city">PREFEITURA MUNICIPAL DE PARNAMIRIM</div>
+              <div class="tvp-event-title">15ª CORRIDA DA EMANCIPAÇÃO — 5KM</div>
+              <div class="tvp-info-row">
+                <span><strong>Participante:</strong> Maria Silva</span>
+                <span><strong>Dependente:</strong> Lucas Silva (10 anos)</span>
+                <span><strong>Bairro:</strong> Cohabinal</span>
+              </div>
             </div>
-            <div class="db-highlight-item">
-              <strong>Índices Parciais Inteligentes</strong>
-              <p>Índices dedicados para buscar <code>registrations WHERE status = 'PENDING_VALIDATION'</code> e posições da <code>waitlist_entries</code> com latência submilisegundo.</p>
-            </div>
-            <div class="db-highlight-item">
-              <strong>Auditoria Estruturada em JSONB</strong>
-              <p>Rastreia snapshot do estado anterior e posterior em cada cancelamento, reversão ou alteração de capacidade.</p>
+            <div class="tvp-right">
+              <div class="tvp-qr-mock">QR CODE</div>
+              <span class="tvp-hash">#TKT-88421</span>
             </div>
           </div>
         </div>
       </div>
       <div class="speaker-notes" data-for="9">
         <strong>Notas de Fala:</strong><br>
-        Apresentar o modelo ao gestor: veja que a conta (account) é desacoplada do participante. Um pai tem 1 conta e cadastra 3 participantes (ele e 2 filhos). Cada filho ganha seu registro e seu ticket individual, com vínculo registrado em participant_guardians.
+        Destacar a conformidade com a LGPD: o sistema respeita dados de menores e garante que os recursos municipais sejam aproveitados pelos moradores de Parnamirim.
       </div>
     </section>
 
-    <!-- SLIDE 10: Estratégia de Escala & Resiliência a Picos -->
+    <!-- SLIDE 10: Como o Sistema Suporta 10.000 Acessos Simultâneos -->
     <section class="slide" data-slide="10" id="slide-10">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Desempenho & Confiabilidade</span>
-          <h2>Estratégia de Escala: Protegendo o Sistema nos Picos</h2>
-          <p class="section-desc">Como o ParnaEventos se comporta quando 10.000 munícipes acessam no primeiro segundo de abertura.</p>
+          <span class="section-tag">Estabilidade & Desempenho</span>
+          <h2>O Que Acontece no Pico de 10.000 Acessos?</h2>
+          <p class="section-desc">Engenharia pensada para que a prefeitura nunca passe pela vergonha de "site fora do ar".</p>
         </div>
 
         <div class="scaling-architecture-grid">
           <div class="scale-tier-card">
-            <div class="tier-badge">Nível 1 • Borda</div>
-            <h4>Fila Virtual & Rate Limit</h4>
+            <div class="tier-badge">Proteção de Borda</div>
+            <h4>Fila Virtual Suave</h4>
             <div class="tier-icon">🛡️</div>
-            <p>Controla a taxa de entrada no momento exato do lançamento do evento. Impede que robôs ou cliques frenéticos sobrecarreguem o servidor.</p>
-            <span class="tier-sub">Proteção contra Denial of Service involuntário</span>
+            <p>Se 5.000 pessoas clicarem ao mesmo tempo às 08h00, o sistema organiza a fila de chegada sem travar o servidor.</p>
           </div>
 
           <div class="scale-tier-card">
-            <div class="tier-badge">Nível 2 • Leitura</div>
-            <h4>Cache Inteligente (Páginas & Regulamentos)</h4>
+            <div class="tier-badge">Velocidade Máxima</div>
+            <h4>Navegação Instantânea</h4>
             <div class="tier-icon">⚡</div>
-            <p>Landing page e informações de eventos cacheadas em memória (Redis/CDN). 90% do tráfego de visualização não toca o banco relacional.</p>
-            <span class="tier-sub">Tempo de resposta &lt; 20ms para navegação</span>
+            <p>A página inicial carrega em menos de 1 segundo, mesmo com milhares de munícipes visualizando os eventos.</p>
           </div>
 
           <div class="scale-tier-card">
-            <div class="tier-badge">Nível 3 • Transacional</div>
-            <h4>Pool Concorrente Otimizado (Postgres)</h4>
-            <div class="tier-icon">🗄️</div>
-            <p>Apenas as requisições de finalização de inscrição disputam a transação de capacidade, garantindo atomicidade com tempo de lock mínimo (&lt; 5ms).</p>
-            <span class="tier-sub">Zero risco de overbooking</span>
+            <div class="tier-badge">Zero Overbooking</div>
+            <h4>Vaga 100% Precisa</h4>
+            <div class="tier-icon">🎯</div>
+            <p>Se há 500 vagas, serão inscritas exatamente 500 pessoas. Nem 501, nem 499. Integridade matemática.</p>
           </div>
 
           <div class="scale-tier-card">
-            <div class="tier-badge">Nível 4 • Assíncrono</div>
-            <h4>Outbox Pattern & Background Workers</h4>
+            <div class="tier-badge">Comunicação Rápida</div>
+            <h4>Disparo de Mensagens</h4>
+            <p>E-mails e avisos de confirmação são despachados em segundo plano sem deixar a tela do cidadão travada.</p>
             <div class="tier-icon">📨</div>
-            <p>Disparo de e-mails, WhatsApp/SMS e geração de PDFs pesados é delegado para filas de processamento assíncrono em segundo plano.</p>
-            <span class="tier-sub">A resposta ao cidadão não fica travada</span>
           </div>
         </div>
 
@@ -901,126 +747,121 @@
           </div>
           <div class="metric-divider"></div>
           <div class="metric-item">
-            <span class="m-val">&lt; 3s</span>
-            <span class="m-lbl">Tempo de Validação no Kit</span>
+            <span class="m-val">&lt; 2s</span>
+            <span class="m-lbl">Bipagem no Balcão</span>
           </div>
           <div class="metric-divider"></div>
           <div class="metric-item">
-            <span class="m-val">Auditável</span>
-            <span class="m-lbl">Conformidade e Transparência</span>
+            <span class="m-val">Transparente</span>
+            <span class="m-lbl">Para a População</span>
           </div>
         </div>
       </div>
       <div class="speaker-notes" data-for="10">
         <strong>Notas de Fala:</strong><br>
-        Responder à preocupação clássica de qualquer gestor de TI: "o sistema vai aguentar a virada de lote?". Mostrar que dividimos a carga: a navegação é cacheada, a escrita é atômica com locks ultrarrápidos e tarefas pesadas (envio de e-mails) vão para filas em background.
+        Tranquilizar o gestor: o sistema não cai quando abre a inscrição da corrida. O sistema absorve o pico e distribui as vagas com total justiça.
       </div>
     </section>
 
-    <!-- SLIDE 11: Roadmap de Implementação em 5 Fases -->
+    <!-- SLIDE 11: Roadmap Simples de Execução (5 Fases) -->
     <section class="slide" data-slide="11" id="slide-11">
       <div class="slide-content">
         <div class="slide-header">
-          <span class="section-tag">Plano de Execução</span>
-          <h2>Roadmap de Desenvolvimento & Entregas</h2>
-          <p class="section-desc">Estratégia iterativa dividida em 5 fases planejadas para rápida validação e segurança operacional.</p>
+          <span class="section-tag">Cronograma de Entrega</span>
+          <h2>Plano de Implantação Rápido e Seguro</h2>
+          <p class="section-desc">Etapas claras para colocar o ParnaEventos em funcionamento para o próximo grande evento do município.</p>
         </div>
 
         <div class="roadmap-timeline">
           <div class="roadmap-milestone">
-            <div class="rm-badge">Fase 1 • Fundação</div>
+            <div class="rm-badge">Fase 1</div>
             <div class="rm-content">
-              <h4>Banco de Dados & Domínio</h4>
-              <p>Criação do schema PostgreSQL, migrations, entidades de domínio, autenticação segura e setup do monólito modular.</p>
-              <div class="rm-deliverable">Entrega: Banco e testes de integridade</div>
+              <h4>Fundação do Sistema & Segurança</h4>
+              <p>Configuração do banco de dados oficial, login seguro e regras de munícipe de Parnamirim.</p>
             </div>
           </div>
 
           <div class="roadmap-milestone">
-            <div class="rm-badge">Fase 2 • Inscrições</div>
+            <div class="rm-badge">Fase 2</div>
             <div class="rm-content">
-              <h4>Regras de Negócio & Anti-Duplicidade</h4>
-              <p>Módulo de eventos, cadastro de dependentes, trava de conflito de datas no mesmo dia e validação de munícipe de Parnamirim.</p>
-              <div class="rm-deliverable">Entrega: Fluxo completo de inscrição online</div>
+              <h4>Portal de Eventos & Trava de Conflito de Data</h4>
+              <p>Landing page com visual moderno, formulário com dependentes menores e bloqueio de 2 eventos no mesmo dia.</p>
             </div>
           </div>
 
           <div class="roadmap-milestone">
-            <div class="rm-badge">Fase 3 • Fila & Vagas</div>
+            <div class="rm-badge">Fase 3</div>
             <div class="rm-content">
-              <h4>Capacidade & Lista de Espera Automática</h4>
-              <p>Implementação do cancelamento protegido por senha e motor de convocação automática do 1º da fila em lote de concorrência.</p>
-              <div class="rm-deliverable">Entrega: Motor de concorrência e fila FIFO</div>
+              <h4>Motor de Fila Automática & Cancelamento</h4>
+              <p>Cancelamento seguro com senha e convocação automática instantânea da lista de espera.</p>
             </div>
           </div>
 
           <div class="roadmap-milestone">
-            <div class="rm-badge">Fase 4 • Operação</div>
+            <div class="rm-badge">Fase 4</div>
             <div class="rm-content">
-              <h4>Tickets & App do Balcão de Kits</h4>
-              <p>Geração de QR Code/Hash, interface web/mobile para operadores biparem tickets, conferência de termos e reversão justificada por gestor.</p>
-              <div class="rm-deliverable">Entrega: Sistema do operador de entrega de kits</div>
+              <h4>App do Balcão de Kits & Leitor de QR Code</h4>
+              <p>Interface para celulares dos operadores no dia da entrega com alerta anti-reutilização.</p>
             </div>
           </div>
 
           <div class="roadmap-milestone highlight-milestone">
-            <div class="rm-badge">Fase 5 • Go-Live</div>
+            <div class="rm-badge">Fase 5 • Piloto</div>
             <div class="rm-content">
-              <h4>Jobs Automáticos, Carga & Lançamento</h4>
-              <p>Job de expiração de inscrições não validadas, fila virtual de proteção, testes de estresse de 5.000 req/s e treinamento da equipe.</p>
-              <div class="rm-deliverable">Entrega: Evento piloto em produção com segurança</div>
+              <h4>Teste de Carga & Primeiro Evento Oficial</h4>
+              <p>Simulação com 2.000 inscrições teste e lançamento oficial no próximo evento do calendário de Parnamirim.</p>
             </div>
           </div>
         </div>
       </div>
       <div class="speaker-notes" data-for="11">
         <strong>Notas de Fala:</strong><br>
-        Mostrar cronograma realista: começamos pelo núcleo sólido (Fase 1 e 2), depois o motor de fila (Fase 3), as ferramentas operacionais de campo (Fase 4) e fechamos com testes de estresse antes de colocar o primeiro evento real no ar.
+        Mostrar compromisso com prazo: o GCTI consegue colocar o piloto para rodar de forma faseada sem riscos para a gestão.
       </div>
     </section>
 
-    <!-- SLIDE 12: Conclusão & Próximos Passos -->
+    <!-- SLIDE 12: Conclusão & Convite ao Sistema em Ação -->
     <section class="slide" data-slide="12" id="slide-12">
       <div class="slide-content slide-conclusion">
         <div class="conclusion-badge">Alinhamento Estratégico</div>
-        <h2>Próximos Passos para a Gestão do GCTI</h2>
+        <h2>Pronto para Revolucionar os Eventos de Parnamirim</h2>
         <p class="conclusion-lead">
-          O ParnaEventos posiciona Parnamirim na vanguarda da transformação digital com integridade, equidade no acesso aos eventos e modernidade para o munícipe.
+          O ParnaEventos eleva o padrão de atendimento ao cidadão de Parnamirim, elimina fraudes e dá à equipe do GCTI o controle total da gestão de eventos.
         </p>
 
         <div class="conclusion-cards-grid">
           <div class="conc-card">
             <div class="conc-num">1</div>
-            <h4>Validação do Esquema SQL</h4>
-            <p>Aprovação formal do modelo relacional e das constraints de integridade apresentadas.</p>
+            <h4>Para o Cidadão</h4>
+            <p>Inscrição rápida pelo celular, comprovante no WhatsApp e fila de espera justa sem apadrinhamento.</p>
           </div>
 
           <div class="conc-card">
             <div class="conc-num">2</div>
-            <h4>PoC da Transação Concorrente</h4>
-            <p>Execução de teste de carga simulando 1.000 requisições simultâneas disputando 10 vagas finais.</p>
+            <h4>Para o Operador de Kit</h4>
+            <p>Bipagem veloz em 2 segundos, conferência de menores e zero complicação com fichas de papel.</p>
           </div>
 
           <div class="conc-card">
             <div class="conc-num">3</div>
-            <h4>Desenvolvimento da Fase 1</h4>
-            <p>Setup do ambiente do GCTI e início da codificação dos contratos e serviços de domínio.</p>
+            <h4>Para o Gestor Afrânio Alex</h4>
+            <p>Painel com métricas por bairro, auditoria completa e controle absoluto das vagas e cronogramas.</p>
           </div>
         </div>
 
         <div class="executive-signoff-card">
           <div class="signoff-quote">
-            "A tecnologia pública municipal atinge seu propósito quando assegura que cada cidadão tenha oportunidade justa, ágil e transparente de participar das realizações da sua cidade."
+            "Chega de teoria: vamos experimentar o sistema completo em funcionamento agora mesmo!"
           </div>
           <div class="signoff-footer">
             <div class="author-block">
-              <strong>Equipe de Engenharia & Inovação</strong>
-              <span>GCTI — Prefeitura de Parnamirim</span>
+              <strong>Equipe GCTI • Tecnologia e Inovação</strong>
+              <span>Prefeitura Municipal de Parnamirim / RN</span>
             </div>
             <div class="interactive-prompt">
-              <button class="btn-primary-glow" id="btnOpenSimulatorFromEnd">
+              <button class="btn-primary-glow" id="btnLaunchPrototypeFromEnd">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                Abrir Demonstração / Simulador Interativo
+                Abrir o Sistema em Ação (Protótipo Funcional)
               </button>
             </div>
           </div>
@@ -1028,19 +869,615 @@
       </div>
       <div class="speaker-notes" data-for="12">
         <strong>Notas de Fala:</strong><br>
-        Encerrar convidando o Afrânio Alex a testar o simulador interativo em tempo real para ver na prática o bloqueio de data, o cancelamento com senha e a convocação instantânea da lista de espera.
+        Encerrar convidando Afrânio Alex a clicar no botão e testar o sistema completo: criar um evento no painel do gestor, se inscrever como cidadão e bipar o ticket como operador!
       </div>
     </section>
 
   </main>
 
-  <!-- Presentation Navigation Floating Bar -->
-  <footer class="app-footer">
+  <!-- =========================================================================
+       VIEW 2: O SISTEMA EM AÇÃO (PROTÓTIPO FUNCIONAL COMPLETO)
+       ========================================================================= -->
+  <section class="prototype-viewport" id="prototypeView">
+    
+    <!-- Prototype Sub-Navigation Bar -->
+    <div class="proto-nav-bar">
+      <div class="proto-nav-left">
+        <span class="proto-label">SISTEMA EM AÇÃO:</span>
+        <button class="proto-tab-btn active" data-tab="landing">
+          <span class="tab-icon">🌐</span> 1. Portal de Eventos (Cidadão)
+        </button>
+        <button class="proto-tab-btn" data-tab="signup">
+          <span class="tab-icon">✍️</span> 2. Cadastro & Inscrição
+        </button>
+        <button class="proto-tab-btn" data-tab="manager">
+          <span class="tab-icon">👨‍💼</span> 3. Painel do Gestor (Afrânio Alex)
+        </button>
+        <button class="proto-tab-btn" data-tab="operator">
+          <span class="tab-icon">📦</span> 4. Balcão do Operador (Entrega de Kits)
+        </button>
+        <button class="proto-tab-btn" data-tab="my-tickets">
+          <span class="tab-icon">🎫</span> 5. Minhas Inscrições
+        </button>
+      </div>
+
+      <div class="proto-nav-right">
+        <button class="btn-return-slides" id="btnReturnToSlides" title="Voltar para a Apresentação">
+          &larr; Voltar para os Slides
+        </button>
+      </div>
+    </div>
+
+    <!-- Prototype Main Container -->
+    <div class="proto-container">
+
+      <!-- ===================================================================
+           TAB 1: PORTAL DE EVENTOS (LANDING PAGE PÚBLICA)
+           =================================================================== -->
+      <div class="proto-tab-pane active" id="pane-landing">
+        <div class="portal-hero">
+          <div class="portal-hero-text">
+            <span class="portal-badge">PORTAL OFICIAL DE EVENTOS • PARNAMIRIM</span>
+            <h1>Descubra e Participe dos Eventos da Sua Cidade</h1>
+            <p>Inscrições gratuitas, transparentes e com confirmação em tempo real para todos os munícipes.</p>
+          </div>
+          <div class="portal-search-box">
+            <input type="text" id="portalSearchInput" placeholder="Buscar por corrida, festival, local..." class="portal-input">
+            <div class="portal-filter-pills">
+              <button class="filter-pill active" data-filter="all">Todos</button>
+              <button class="filter-pill" data-filter="esporte">Corridas & Esportes</button>
+              <button class="filter-pill" data-filter="cultura">Gastronomia & Cultura</button>
+              <button class="filter-pill" data-filter="tech">Inovação & Cursos</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="portal-events-section">
+          <div class="section-title-row">
+            <h2>Eventos em Parnamirim com Inscrições</h2>
+            <span class="events-count-badge" id="eventsCountBadge">4 Eventos Disponíveis</span>
+          </div>
+
+          <!-- Dynamic Events Grid -->
+          <div class="events-grid-portal" id="eventsGridPortal">
+            <!-- Rendered dynamically by app.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 2: CADASTRO & INSCRIÇÃO DO CIDADÃO
+           =================================================================== -->
+      <div class="proto-tab-pane" id="pane-signup">
+        <div class="signup-wrapper">
+          <div class="signup-card">
+            <div class="signup-header">
+              <span class="section-tag">Formulário Oficial de Inscrição</span>
+              <h2 id="signupFormEventTitle">Inscrição no Evento Municipal</h2>
+              <p class="text-muted">Preencha seus dados para garantir sua vaga e a de seus dependentes menores.</p>
+            </div>
+
+            <!-- Event Selected Alert -->
+            <div class="selected-event-summary" id="selectedEventSummary">
+              <div class="ses-title">
+                <strong id="sesEventName">15ª Corrida da Emancipação de Parnamirim</strong>
+                <span class="ses-date" id="sesEventDate">📅 25/11/2026 • 07:00</span>
+              </div>
+              <div class="ses-meta">
+                <span>📍 Cohabinal • Centro</span>
+                <span>Idade Mínima: <strong>16 anos</strong></span>
+                <span class="badge-vagas" id="sesEventVagas">48 vagas restantes</span>
+              </div>
+            </div>
+
+            <form id="formCitizenEnroll" class="styled-form">
+              <div class="form-section-title">1. Dados do Responsável / Titular</div>
+              
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="citizenFullName">Nome Completo: *</label>
+                  <input type="text" id="citizenFullName" class="form-control" placeholder="Ex: Maria Clara Silva" value="Maria Clara Silva" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="citizenCpf">CPF do Munícipe: *</label>
+                  <input type="text" id="citizenCpf" class="form-control" placeholder="000.000.000-00" value="045.892.124-78" required>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="citizenPhone">WhatsApp / Celular: *</label>
+                  <input type="tel" id="citizenPhone" class="form-control" placeholder="(84) 90000-0000" value="(84) 98822-1133" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="citizenNeighborhood">Bairro em Parnamirim (Regra Municipal): *</label>
+                  <select id="citizenNeighborhood" class="form-control" required>
+                    <option value="Cohabinal" selected>Cohabinal</option>
+                    <option value="Nova Parnamirim">Nova Parnamirim</option>
+                    <option value="Santos Reis">Santos Reis</option>
+                    <option value="Monte Castelo">Monte Castelo</option>
+                    <option value="Boa Esperança">Boa Esperança</option>
+                    <option value="Rosa dos Ventos">Rosa dos Ventos</option>
+                    <option value="Parque de Exposições">Parque de Exposições</option>
+                    <option value="Passagem de Areia">Passagem de Areia</option>
+                    <option value="Emaús">Emaús</option>
+                    <option value="Pirangi do Norte">Praia de Pirangi do Norte</option>
+                    <option value="Cotovelo">Praia de Cotovelo</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Dependentes Menores de Idade -->
+              <div class="dependents-box">
+                <div class="dependents-header">
+                  <div>
+                    <strong>2. Dependentes Menores de Idade (Filhos / Tutelados)</strong>
+                    <p>Cada menor ocupa 1 vaga e receberá seu próprio ticket.</p>
+                  </div>
+                  <button type="button" class="btn-outline-primary-sm" id="btnAddDependent">
+                    + Adicionar Menor
+                  </button>
+                </div>
+
+                <div class="dependents-list" id="dependentsContainer">
+                  <!-- Dependent items inserted here -->
+                </div>
+              </div>
+
+              <!-- Termos e Conflito -->
+              <div class="terms-check-box">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="checkTerms" checked required>
+                  <span>Declaro ser morador de Parnamirim e estou ciente de que deverei apresentar comprovante de residência e documento com foto na entrega do kit.</span>
+                </label>
+              </div>
+
+              <!-- Conflict Alert (Hidden by default, shown if conflict) -->
+              <div class="conflict-alert-box" id="conflictAlertBox" style="display: none;">
+                <div class="cab-icon">🚫</div>
+                <div class="cab-text">
+                  <strong>Conflito de Data Detectado!</strong>
+                  <p id="conflictAlertText">Você já possui inscrição ativa em outro evento realizado nesta mesma data. A legislação municipal proíbe duas inscrições no mesmo dia para democratizar o acesso.</p>
+                </div>
+              </div>
+
+              <div class="form-actions-row">
+                <button type="submit" class="btn-primary-glow btn-block" id="btnSubmitEnrollment">
+                  Concluir Inscrição & Gerar Tickets &rarr;
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Live Preview Ticket Box -->
+          <div class="ticket-preview-sidebar" id="ticketPreviewSidebar">
+            <div class="sidebar-sticky-box">
+              <h3>Seu Ticket Digital Oficial</h3>
+              <p class="text-muted">Apresente este bilhete no balcão de entrega de kits.</p>
+
+              <div class="live-ticket-card" id="liveGeneratedTicket">
+                <div class="lt-header">
+                  <span class="lt-gov">PREFEITURA DE PARNAMIRIM</span>
+                  <span class="lt-status-badge badge-pending" id="ltStatusBadge">RESERVADO</span>
+                </div>
+                <div class="lt-body">
+                  <h4 id="ltEventName">15ª Corrida da Emancipação</h4>
+                  <div class="lt-data-row">
+                    <span>Data: <strong id="ltDate">25/11/2026</strong></span>
+                    <span>Local: <strong id="ltLocal">Cohabinal</strong></span>
+                  </div>
+                  <div class="lt-person">
+                    Titular: <strong id="ltParticipant">Maria Clara Silva</strong>
+                  </div>
+                  <div class="lt-dependents" id="ltDependentsText">
+                    Sem dependentes vinculados
+                  </div>
+                  <div class="lt-qr-code-box">
+                    <div class="qr-mock-visual">
+                      <div class="qr-grid"></div>
+                      <span class="qr-label">QR CODE OFICIAL</span>
+                    </div>
+                    <div class="qr-hash-text">
+                      <small>Token de Validação:</small>
+                      <code id="ltTokenHash">e3b0c442...88421</code>
+                    </div>
+                  </div>
+                </div>
+                <div class="lt-footer">
+                  <span>1 Inscrição • Vaga Garantida</span>
+                  <button class="btn-sm btn-outline-white" id="btnTestScanThisTicket">
+                    Testar no Balcão do Operador &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <div class="tip-card-mini">
+                <strong>💡 Dica do Sistema:</strong>
+                <span>Experimente se inscrever no <em>Festival Gastronômico</em> (que acontece na mesma data) para ver a trava de conflito de datas em ação!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 3: PAINEL DO GESTOR (SIMULAÇÃO DO AFRÂNIO ALEX / GCTI)
+           =================================================================== -->
+      <div class="proto-tab-pane" id="pane-manager">
+        <div class="manager-dashboard-container">
+          <div class="dashboard-header-bar">
+            <div>
+              <span class="section-tag">GCTI • Painel Administrativo</span>
+              <h2>Gestor: Afrânio Alex — Gestão de Eventos Municipais</h2>
+              <p class="text-muted">Controle de vagas, publicação de editais, alteração de capacidade e auditoria.</p>
+            </div>
+            <div class="dashboard-actions">
+              <button class="btn-primary" id="btnToggleNewEventForm">
+                + Cadastrar Novo Evento Municipal
+              </button>
+            </div>
+          </div>
+
+          <!-- Top Metric Cards -->
+          <div class="manager-metrics-grid">
+            <div class="dash-metric-card">
+              <div class="dm-label">Eventos Publicados</div>
+              <div class="dm-val" id="metricTotalEvents">4</div>
+              <div class="dm-sub">Todos no calendário oficial</div>
+            </div>
+
+            <div class="dash-metric-card">
+              <div class="dm-label">Total de Vagas Ofertadas</div>
+              <div class="dm-val" id="metricTotalSlots">1.720</div>
+              <div class="dm-sub">Capacidade da cidade</div>
+            </div>
+
+            <div class="dash-metric-card">
+              <div class="dm-label">Inscrições Realizadas</div>
+              <div class="dm-val highlight" id="metricTotalEnrolled">1.482</div>
+              <div class="dm-sub">86.1% de ocupação</div>
+            </div>
+
+            <div class="dash-metric-card">
+              <div class="dm-label">Kits Já Entregues</div>
+              <div class="dm-val success" id="metricKitsValidated">1.120</div>
+              <div class="dm-sub">Validado por QR Code</div>
+            </div>
+          </div>
+
+          <!-- New Event Form Collapsible Box -->
+          <div class="new-event-form-panel" id="newEventFormPanel" style="display: none;">
+            <div class="panel-header">
+              <h3>Criar e Publicar Novo Evento Municipal</h3>
+              <button class="btn-close-sm" id="btnCloseNewEventForm">&times;</button>
+            </div>
+            <form id="formCreateEvent" class="styled-form">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="evTitle">Nome do Evento: *</label>
+                  <input type="text" id="evTitle" class="form-control" placeholder="Ex: Corrida Noturna da Cohabinal" required>
+                </div>
+                <div class="form-group">
+                  <label for="evCategory">Categoria: *</label>
+                  <select id="evCategory" class="form-control" required>
+                    <option value="esporte">Esporte & Corrida</option>
+                    <option value="cultura">Cultura & Gastronomia</option>
+                    <option value="tech">Tecnologia & Inovação</option>
+                    <option value="meio-ambiente">Meio Ambiente & Lazer</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label for="evDate">Data do Evento: *</label>
+                  <input type="date" id="evDate" class="form-control" value="2026-12-20" required>
+                </div>
+                <div class="form-group">
+                  <label for="evTime">Horário: *</label>
+                  <input type="text" id="evTime" class="form-control" placeholder="07:30" value="07:30" required>
+                </div>
+                <div class="form-group">
+                  <label for="evCapacity">Capacidade de Vagas: *</label>
+                  <input type="number" id="evCapacity" class="form-control" placeholder="Ex: 300" value="250" min="10" required>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="evLocation">Local / Bairro em Parnamirim: *</label>
+                  <input type="text" id="evLocation" class="form-control" placeholder="Ex: Parque Aluízio Alves, Cohabinal" value="Parque Aluízio Alves" required>
+                </div>
+                <div class="form-group">
+                  <label for="evMinAge">Idade Mínima: *</label>
+                  <input type="number" id="evMinAge" class="form-control" value="12" min="0" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="evDescription">Descrição & Regulamento Resumido:</label>
+                <textarea id="evDescription" class="form-control" rows="2" placeholder="Informações aos munícipes...">Evento esportivo aberto à população de Parnamirim com percurso de 5km e entrega de medalhas.</textarea>
+              </div>
+
+              <div class="form-actions-row">
+                <button type="submit" class="btn-primary-glow">
+                  ✓ Publicar Evento Imediatamente na Landing Page
+                </button>
+                <button type="button" class="btn-outline-sm" id="btnCancelCreateEvent">Cancelar</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Manager Events Table & Controls -->
+          <div class="manager-events-table-card">
+            <div class="card-header-clean">
+              <h3>Eventos Cadastrados no Sistema</h3>
+              <span class="text-muted">Ações de capacidade, comunicado e cancelamento</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="manager-table" id="managerEventsTable">
+                <thead>
+                  <tr>
+                    <th>Evento</th>
+                    <th>Data</th>
+                    <th>Local</th>
+                    <th>Vagas / Ocupação</th>
+                    <th>Status</th>
+                    <th>Ações do Gestor Afrânio</th>
+                  </tr>
+                </thead>
+                <tbody id="managerEventsTbody">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 4: BALCÃO DO OPERADOR (ENTREGA DE KITS & SCANNER)
+           =================================================================== -->
+      <div class="proto-tab-pane" id="pane-operator">
+        <div class="operator-station-container">
+          <div class="operator-header-bar">
+            <div>
+              <span class="section-tag">Posto Presencial</span>
+              <h2>Balcão de Entrega de Kits — Parnamirim</h2>
+              <p class="text-muted">Interface do operador no local físico para bipagem e conferência de termos.</p>
+            </div>
+            <div class="operator-badge-status">
+              <span class="pulse-dot"></span>
+              <strong>Terminal #OP-01 (Conectado)</strong>
+            </div>
+          </div>
+
+          <div class="operator-grid-layout">
+            <!-- Left: Scanner & Lookup -->
+            <div class="operator-scanner-panel">
+              <div class="osp-box">
+                <h4>Leitura de QR Code / Código de Inscrição</h4>
+                <p class="text-muted">Aponte o leitor ou selecione um ticket recente da simulação:</p>
+
+                <div class="form-group">
+                  <label for="opInputTicketCode">Digitar Token ou Código:</label>
+                  <div class="input-with-btn">
+                    <input type="text" id="opInputTicketCode" class="form-control" placeholder="Ex: TKT-88421" value="TKT-88421">
+                    <button class="btn-primary" id="btnOpSearchTicket">Buscar</button>
+                  </div>
+                </div>
+
+                <div class="quick-tickets-helper">
+                  <label>Tickets Recentes Criados para Testar com 1 Toque:</label>
+                  <div class="quick-tokens-list" id="quickTokensList">
+                    <!-- Dynamic pills to click -->
+                  </div>
+                </div>
+
+                <!-- Camera Simulation Frame -->
+                <div class="mock-camera-viewport">
+                  <div class="camera-lens">
+                    <div class="laser-scanner-line"></div>
+                    <div class="qr-target-box"></div>
+                  </div>
+                  <span class="camera-status-text">Câmera Ativa • Leitura em Tempo Real (&lt; 2s)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Ticket Inspector & Validation -->
+            <div class="operator-result-panel">
+              <div class="orp-card" id="orpCard">
+                <div class="orp-header">
+                  <span class="orp-badge-status" id="orpStatusBadge">AGUARDANDO LEITURA</span>
+                  <span class="orp-ticket-number" id="orpTicketNumber">#TKT-88421</span>
+                </div>
+
+                <div class="orp-body" id="orpBodyContent">
+                  <div class="orp-event-headline">
+                    <h3 id="orpEventTitle">15ª Corrida da Emancipação de Parnamirim</h3>
+                    <span id="orpEventDateBadge">📅 25/11/2026 • Cohabinal</span>
+                  </div>
+
+                  <div class="orp-details-box">
+                    <div class="orp-field">
+                      <small>Nome do Titular:</small>
+                      <strong id="orpParticipantName">Maria Clara Silva</strong>
+                    </div>
+                    <div class="orp-field">
+                      <small>CPF:</small>
+                      <span id="orpParticipantCpf">045.892.124-78</span>
+                    </div>
+                    <div class="orp-field">
+                      <small>Bairro Confirmado:</small>
+                      <span id="orpParticipantBairro">Cohabinal (Parnamirim)</span>
+                    </div>
+                  </div>
+
+                  <!-- Dependent alert if present -->
+                  <div class="orp-dependent-alert" id="orpDependentAlert">
+                    <div class="oda-icon">👶</div>
+                    <div class="oda-content">
+                      <strong>Dependente Menor de Idade:</strong>
+                      <span id="orpDependentName">Lucas Silva (10 anos - Filho)</span>
+                      <small>Exigência: Responsável presente e assinatura do termo no balcão.</small>
+                    </div>
+                  </div>
+
+                  <!-- Checklist -->
+                  <div class="operator-checklist">
+                    <label class="check-item">
+                      <input type="checkbox" id="opCheckDoc" checked>
+                      <span>Documento oficial com foto conferido</span>
+                    </label>
+                    <label class="check-item">
+                      <input type="checkbox" id="opCheckResidency" checked>
+                      <span>Comprovante de residência em Parnamirim verificado</span>
+                    </label>
+                    <label class="check-item" id="opCheckTermWrapper">
+                      <input type="checkbox" id="opCheckTerm" checked>
+                      <span>Termo de responsabilidade do menor assinado no balcão</span>
+                    </label>
+                  </div>
+
+                  <!-- Validation Action -->
+                  <div class="orp-actions-box">
+                    <button class="btn-success-large" id="btnOpConfirmKit">
+                      ✓ Validar Ticket & Confirmar Entrega do Kit
+                    </button>
+                    
+                    <button class="btn-outline-danger-sm" id="btnOpRevertValidation">
+                      Revogar Validação (Ação do Gestor)
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Alert of Fraud / Duplicate Use (Red Screen) -->
+                <div class="orp-fraud-alert" id="orpFraudAlert" style="display: none;">
+                  <div class="ofa-icon">🚨</div>
+                  <h3>ALERTA: TICKET JÁ UTILIZADO!</h3>
+                  <p id="orpFraudDetails">
+                    Este ticket já foi validado e o kit foi entregue hoje às 14:32 pelo Operador no Balcão 1.
+                  </p>
+                  <div class="ofa-badge">TENTATIVA DE REUSO BLOQUEADA</div>
+                  <button class="btn-outline-white-sm mt-3" id="btnResetFraudView">Fechar Alerta</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 5: MINHAS INSCRIÇÕES (VISÃO DO MUNÍCIPE & CANCELAMENTO COM SENHA)
+           =================================================================== -->
+      <div class="proto-tab-pane" id="pane-my-tickets">
+        <div class="my-tickets-container">
+          <div class="my-tickets-header">
+            <div>
+              <span class="section-tag">Área do Munícipe</span>
+              <h2>Meus Ingressos & Inscrições Municipais</h2>
+              <p class="text-muted">Acompanhe o status dos seus tickets e gerencie inscrições da sua família.</p>
+            </div>
+            <div class="user-greeting">
+              <span>Cidadão conectado: <strong>Maria Clara Silva</strong></span>
+            </div>
+          </div>
+
+          <div class="tickets-cards-list" id="myTicketsList">
+            <!-- Dynamic tickets rendered by app.js -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MODAL: CANCELAMENTO SEGURO COM SENHA
+       ========================================================================= -->
+  <div class="modal-backdrop" id="modalCancelTicket">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3>Cancelar Inscrição Municipal</h3>
+        <button class="btn-close" id="btnCloseCancelModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          Ao cancelar, sua vaga será liberada imediatamente para a <strong>lista de espera</strong>. Para sua segurança contra cancelamentos indevidos, digite sua senha de munícipe.
+        </p>
+
+        <div class="selected-ticket-cancel-info" id="cancelTicketInfoBox">
+          <strong id="cancelEventNameTitle">15ª Corrida da Emancipação</strong>
+          <span id="cancelTicketCodeLabel">Ticket: #TKT-88421</span>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="inputCancelPassword">Senha da Conta (Padrão de Teste: <code>parnamirim123</code>):</label>
+          <input type="password" id="inputCancelPassword" class="form-control" placeholder="Digite sua senha...">
+        </div>
+
+        <div class="cancel-modal-actions mt-3">
+          <button class="btn-danger" id="btnConfirmCancelRegistration">
+            Confirmar Cancelamento & Liberar Vaga
+          </button>
+          <button class="btn-outline-sm" id="btnDismissCancelModal">Manter Minha Vaga</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: COMUNICADO OFICIAL DO GESTOR
+       ========================================================================= -->
+  <div class="modal-backdrop" id="modalManagerBroadcast">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3>Emitir Comunicado Oficial aos Inscritos</h3>
+        <button class="btn-close" id="btnCloseBroadcastModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          Esta mensagem será transmitida imediatamente para o e-mail e WhatsApp de todos os participantes do evento selecionado.
+        </p>
+
+        <div class="form-group">
+          <label for="broadcastEventName">Evento Destinatário:</label>
+          <input type="text" id="broadcastEventName" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="broadcastSubject">Assunto Oficial:</label>
+          <input type="text" id="broadcastSubject" class="form-control" value="Aviso Importante sobre o Local da Entrega de Kits">
+        </div>
+
+        <div class="form-group">
+          <label for="broadcastMessage">Mensagem aos Cidadãos:</label>
+          <textarea id="broadcastMessage" class="form-control" rows="3">A Prefeitura de Parnamirim informa que a entrega dos kits ocorrerá no Ginásio da Cohabinal a partir das 08:00 com apresentação do ticket no celular.</textarea>
+        </div>
+
+        <div class="modal-actions-clean mt-3">
+          <button class="btn-primary" id="btnSendBroadcast">
+            Disparar Comunicado via WhatsApp/E-mail
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PRESENTATION FOOTER CONTROLS
+       ========================================================================= -->
+  <footer class="app-footer" id="appFooter">
     <div class="footer-left">
       <span class="hotkey-tip"><kbd>←</kbd> <kbd>→</kbd> Navegar</span>
       <span class="hotkey-tip"><kbd>Espaço</kbd> Avançar</span>
-      <span class="hotkey-tip"><kbd>S</kbd> Simulador</span>
       <span class="hotkey-tip"><kbd>N</kbd> Notas</span>
+      <span class="hotkey-tip"><kbd>G</kbd> Grade</span>
       <span class="hotkey-tip"><kbd>F</kbd> Tela Cheia</span>
     </div>
 
@@ -1061,7 +1498,7 @@
     </div>
 
     <div class="footer-right">
-      <span class="footer-copyright">GCTI Parnamirim © 2026 • Documento Oficial de Arquitetura</span>
+      <span class="footer-copyright">GCTI Parnamirim © 2026 • Proposta Oficial</span>
     </div>
   </footer>
 
@@ -1080,7 +1517,7 @@
     </div>
   </div>
 
-  <!-- Speaker Notes Modal / Panel -->
+  <!-- Speaker Notes Panel -->
   <div class="notes-panel" id="notesPanel">
     <div class="notes-header">
       <h4>Notas do Apresentador (Slide <span id="notesSlideNumber">1</span>)</h4>
@@ -1091,203 +1528,8 @@
     </div>
   </div>
 
-  <!-- LIVE SIMULATOR MODAL (Interactive Demo for the Manager!) -->
-  <div class="modal-backdrop" id="modalSimulator">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-header">
-        <div class="sim-header-title">
-          <span class="pulse-dot"></span>
-          <h3>Simulador Interativo de Regras de Negócio & Concorrência</h3>
-        </div>
-        <button class="btn-close" id="btnCloseSimulator">&times;</button>
-      </div>
-      <div class="modal-body simulator-body">
-        <p class="sim-intro">
-          Demonstração em tempo real para o Gestor Afrânio Alex das 4 regras críticas implementadas pelo motor do ParnaEventos.
-        </p>
-
-        <!-- Scenario Tabs -->
-        <div class="sim-tabs">
-          <button class="sim-tab-btn active" data-scenario="duplicidade">1. Conflito de Data no Mesmo Dia</button>
-          <button class="sim-tab-btn" data-scenario="fila">2. Capacidade & Lista de Espera Automática</button>
-          <button class="sim-tab-btn" data-scenario="cancelamento">3. Cancelamento Seguro com Senha</button>
-          <button class="sim-tab-btn" data-scenario="ticket">4. Validação & Anti-Reutilização de Ticket</button>
-        </div>
-
-        <!-- Scenario 1: Conflito de Data -->
-        <div class="sim-scenario-pane active" id="pane-duplicidade">
-          <div class="sim-card-split">
-            <div class="sim-controls">
-              <h4>Cenário: Cidadão tentando se inscrever em 2 eventos na mesma data</h4>
-              <p class="text-muted">Data simulada: <strong>25/11/2026</strong> (Domingo)</p>
-              
-              <div class="form-group">
-                <label>Participante Ativo:</label>
-                <div class="input-fake">Maria Silva (CPF: 045.***.***-89) • Munícipe de Parnamirim</div>
-              </div>
-
-              <div class="events-choice-box">
-                <div class="event-choice-item">
-                  <div class="ec-info">
-                    <strong>Evento A: Corrida da Emancipação de Parnamirim (5km)</strong>
-                    <span>Data: 25/11/2026 • 07:00</span>
-                  </div>
-                  <span class="badge-status enrolled">Inscrição Ativa</span>
-                </div>
-
-                <div class="event-choice-item">
-                  <div class="ec-info">
-                    <strong>Evento B: Festival Gastronômico de Parnamirim</strong>
-                    <span>Data: 25/11/2026 • 18:00</span>
-                  </div>
-                  <button class="btn-sm btn-primary" id="btnSimTryEnrollSameDay">Tentar Inscrição no Evento B</button>
-                </div>
-              </div>
-
-              <button class="btn-outline-sm" id="btnResetSameDay">Resetar Cenário</button>
-            </div>
-
-            <div class="sim-terminal">
-              <div class="terminal-bar">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="term-title">Log do Servidor Transacional</span>
-              </div>
-              <div class="term-output" id="termOutputSameDay">
-                <div class="line sys">[SISTEMA] Aguardando ação do usuário...</div>
-                <div class="line info">[INFO] Maria Silva já possui inscrição ativa no Evento A para a data 25/11/2026.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scenario 2: Capacidade & Fila -->
-        <div class="sim-scenario-pane" id="pane-fila">
-          <div class="sim-card-split">
-            <div class="sim-controls">
-              <h4>Cenário: Evento com 3 vagas totais</h4>
-              
-              <div class="capacity-gauge-box">
-                <div class="gauge-header">
-                  <span>Ocupação do Evento:</span>
-                  <strong id="simCapCount">3 / 3 (LOTADO)</strong>
-                </div>
-                <div class="gauge-track">
-                  <div class="gauge-fill" id="simCapBar" style="width: 100%;"></div>
-                </div>
-              </div>
-
-              <div class="form-group mt-3">
-                <label>Fila de Espera Ativa (Ordem de Chegada):</label>
-                <ol class="waitlist-ui-list" id="simWaitlistUI">
-                  <li><strong>1º</strong> Carlos Eduardo (Aguardando vaga)</li>
-                  <li><strong>2º</strong> Juliana Medeiros (Aguardando vaga)</li>
-                </ol>
-              </div>
-
-              <div class="actions-row mt-3">
-                <button class="btn-primary" id="btnSimAddWaitlist">Inscrever Novo Cidadão (Vai p/ Fila)</button>
-                <button class="btn-danger" id="btnSimFreeSlot">Simular Cancelamento de Vaga (Titular)</button>
-              </div>
-            </div>
-
-            <div class="sim-terminal">
-              <div class="terminal-bar">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="term-title">Motor de Concorrência & Fila</span>
-              </div>
-              <div class="term-output" id="termOutputFila">
-                <div class="line sys">[STATUS] Evento lotado. Inscrições entram automaticamente na fila de espera.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scenario 3: Cancelamento com Senha -->
-        <div class="sim-scenario-pane" id="pane-cancelamento">
-          <div class="sim-card-split">
-            <div class="sim-controls">
-              <h4>Cenário: Cancelamento Seguro com Validação de Senha</h4>
-              <p class="text-muted">Apenas o próprio cidadão munido de senha pode cancelar para liberar vaga.</p>
-
-              <div class="form-group">
-                <label>Inscrição Selecionada:</label>
-                <div class="input-fake">#REG-88421 • Participante: Roberto Costa (Parnamirim)</div>
-              </div>
-
-              <div class="form-group">
-                <label for="simCancelPassword">Digite a Senha da Conta (Teste: <code>parnamirim123</code>):</label>
-                <input type="password" id="simCancelPassword" class="sim-input" placeholder="Digite a senha...">
-              </div>
-
-              <div class="form-check-group">
-                <label>
-                  <input type="checkbox" id="simRegsOpenCheck" checked>
-                  Período de Inscrições Aberto? (Se desmarcado, encerrou)
-                </label>
-              </div>
-
-              <div class="actions-row mt-3">
-                <button class="btn-danger" id="btnSimSubmitCancel">Confirmar Cancelamento de Inscrição</button>
-              </div>
-            </div>
-
-            <div class="sim-terminal">
-              <div class="terminal-bar">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="term-title">Log de Cancelamento & Auditoria</span>
-              </div>
-              <div class="term-output" id="termOutputCancel">
-                <div class="line sys">[PRONTO] Insira a senha cadastrada para testar a validação de cancelamento.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scenario 4: Ticket Único -->
-        <div class="sim-scenario-pane" id="pane-ticket">
-          <div class="sim-card-split">
-            <div class="sim-controls">
-              <h4>Cenário: Leitura de Ticket no Balcão de Kits pelo Operador</h4>
-              
-              <div class="ticket-preview-card" id="simTicketCard">
-                <div class="tp-header">
-                  <span>PREFEITURA DE PARNAMIRIM • TICKET DE KIT</span>
-                  <span class="tp-status" id="simTicketStatusBadge">ISSUED (VÁLIDO)</span>
-                </div>
-                <div class="tp-body">
-                  <div class="tp-qr">
-                    <div class="mock-qr">QR CODE</div>
-                  </div>
-                  <div class="tp-details">
-                    <div><strong>Titular:</strong> Ana Clara Souza</div>
-                    <div><strong>Dependente:</strong> Lucas Souza (9 anos - Autorizado)</div>
-                    <div><strong>Token Hash:</strong> <code id="simTicketHash">e3b0c442...89b1</code></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="actions-row mt-3">
-                <button class="btn-primary" id="btnSimScanTicket">Operador: Bipar e Validar Entrega de Kit</button>
-                <button class="btn-outline-sm" id="btnSimRevertTicket">Gestor GCTI: Revogar Validação c/ Motivo</button>
-                <button class="btn-outline-sm" id="btnSimResetTicket">Resetar Ticket</button>
-              </div>
-            </div>
-
-            <div class="sim-terminal">
-              <div class="terminal-bar">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="term-title">Validação do Balcão (Operador ID: #OP-14)</span>
-              </div>
-              <div class="term-output" id="termOutputTicket">
-                <div class="line sys">[LEITOR] Aguardando leitura do QR Code do participante...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
   <script src="app.js"></script>
 </body>
